@@ -20,6 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initComponents() {
         this.tvContinue = findViewById(R.id.btn_continue);
-        this.tvContinue.setOnClickListener(v -> setContentView(R.layout.activity_main2));
+
     }
 }

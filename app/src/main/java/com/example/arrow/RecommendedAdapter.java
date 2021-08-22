@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.*;
 
-public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder>{
-    ArrayList<FeaturedHelperClass> recProfs;
+public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.FeaturedViewHolder>{
+    ArrayList<RecommendedHelperClass> recProfs;
 
-    public FeaturedAdapter(ArrayList<FeaturedHelperClass> recProfs) {
+    public RecommendedAdapter(ArrayList<RecommendedHelperClass> recProfs) {
         this.recProfs = recProfs;
     }
 
@@ -45,11 +45,11 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public void onBindViewHolder(@NonNull FeaturedViewHolder holder, int position) {
 
-        FeaturedHelperClass featuredHelperClass = recProfs.get(position);
+        RecommendedHelperClass recommendedHelperClass = recProfs.get(position);
 
-        holder.image.setImageResource(featuredHelperClass.getImage());
-        holder.name.setText(featuredHelperClass.getName());
-        holder.desc.setText(featuredHelperClass.getDescription());
+        holder.image.setImageResource(recommendedHelperClass.getImage());
+        holder.name.setText(recommendedHelperClass.getName());
+        holder.desc.setText(recommendedHelperClass.getDescription());
 
     }
 

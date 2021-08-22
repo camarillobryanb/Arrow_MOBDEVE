@@ -40,50 +40,54 @@
             android:src="@drawable/profile_icon" />
 
 
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/search_box_bg"
+            android:elevation="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Search" />
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19dp"
+                android:src="@drawable/search_icon" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/search_box_bg"
-                    android:elevation="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:text="Search" />
-
-                    <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="23dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="19dp"
-                        android:src="@drawable/search_icon" />
-
-                </RelativeLayout>
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:background="@color/white"
@@ -127,7 +131,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:background="@color/white"
-                    android:id="@+id/featured_recycler"
+                    android:id="@+id/recommendedProfs_recycler"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/featured_background"
                     android:layout_width="match_parent" />
@@ -168,7 +172,7 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/most_viewed_recycler"
+                    android:id="@+id/college_profs_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -192,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Current Professors"
+                        android:text="CURRENT PROFESSORS"
                         android:textAllCaps="true"
                         android:textColor="@color/green"
                         android:textSize="20sp" />
@@ -208,8 +212,15 @@
 
                 </RelativeLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/current_profs_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
+
+
+
 
 
 

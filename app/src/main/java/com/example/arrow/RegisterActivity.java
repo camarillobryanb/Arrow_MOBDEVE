@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Collections;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // Firebase
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance();
     }
 
     private void initComponents() {
@@ -88,12 +94,24 @@ public class RegisterActivity extends AppCompatActivity {
         this.pbRegister.setVisibility(View.VISIBLE);
 
         // Register to Firebase
-        this.mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            successfulRegistration();
+
+                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("users");
+
+                            dbRef.push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        successfulRegistration();
+                                    } else {
+                                        failedRegistration();
+                                    }
+                                }
+                            });
                         } else {
                             failedRegistration();
                         }

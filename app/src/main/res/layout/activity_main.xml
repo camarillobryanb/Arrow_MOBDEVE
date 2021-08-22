@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/open_sans"
         android:lineSpacingExtra="-5dp"
         android:text="Find the right professors to take\nin your class!"
         android:textAlignment="center"

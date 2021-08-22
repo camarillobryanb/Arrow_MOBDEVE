@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Arrow</string>
+
+    <string name="main1_heading">Find the right\nProfessors for You!</string>
+    <string name="main2_heading">Find Your Classes</string>
+    <string name="main3_heading">Leave Reviews</string>
+
+    <string name="main1_desc">Find the right professors to take\nin your class!</string>
+    <string name="main2_desc">Find the right professors to take\nin your class!</string>
+    <string name="main3_desc">Help other students with their\nchoices and leave reviews about\nyour past classes!</string>
 </resources>

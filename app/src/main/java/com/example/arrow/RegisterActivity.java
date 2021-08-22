@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
-        this.database = FirebaseDatabase.getInstance();
+        this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 
     private void initComponents() {
@@ -100,9 +100,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
 
-                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("users");
-
-                            dbRef.push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            database.getReference("users")
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
@@ -112,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
                         } else {
                             failedRegistration();
                         }

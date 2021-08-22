@@ -1,10 +1,10 @@
 package com.example.arrow;
 
-public class FeaturedHelperClass {
+public class RecommendedHelperClass {
     int image;
     String name,description;
 
-    public FeaturedHelperClass(int image, String name, String description) {
+    public RecommendedHelperClass(int image, String name, String description) {
         this.image = image;
         this.name = name;
         this.description = description;

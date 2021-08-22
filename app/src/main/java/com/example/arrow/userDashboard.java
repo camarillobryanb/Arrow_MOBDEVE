@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
 public class userDashboard extends AppCompatActivity {
 
-    RecyclerView featuredRecycler;
-    RecyclerView  mostViewedRecycler;
+    RecyclerView recommendedRecycler;
+    RecyclerView CollegeProfessorsRecycler;
+    RecyclerView CurrentProfessorsRecycler;
+
     RecyclerView.Adapter adapter;
 
     @Override
@@ -24,33 +26,39 @@ public class userDashboard extends AppCompatActivity {
         setContentView(R.layout.user_dashboard);
 
         //Hooks
-        featuredRecycler = findViewById(R.id.featured_recycler);
-        mostViewedRecycler = findViewById(R.id.most_viewed_recycler);
+        recommendedRecycler = findViewById(R.id.recommendedProfs_recycler);
+        CollegeProfessorsRecycler = findViewById(R.id.college_profs_recycler);
+        CurrentProfessorsRecycler = findViewById(R.id.current_profs_recycler);
 
 
-
-        featuredRecycler();
+        recommendedProfessors();
         yourCollegeProfessors();
+        CurrentProfessors();
 
 
+    }
 
+    private void recommendedProfessors() {
+        recommendedRecycler.setHasFixedSize(true);
+        recommendedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        ArrayList<RecommendedHelperClass> recProfs = new ArrayList<>();
+
+        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
+
+        adapter = new RecommendedAdapter(recProfs);
+        recommendedRecycler.setAdapter(adapter);
     }
 
 
     private void yourCollegeProfessors() {
+        CollegeProfessorsRecycler.setHasFixedSize(true);
+        CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
     }
-
-    private void featuredRecycler(){
-        featuredRecycler.setHasFixedSize(true);
-        featuredRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        ArrayList<FeaturedHelperClass> recProfs = new ArrayList<>();
-
-        recProfs.add(new FeaturedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-
-
-        adapter = new FeaturedAdapter(recProfs);
-        featuredRecycler.setAdapter(adapter);
+    private void CurrentProfessors() {
+        CurrentProfessorsRecycler.setHasFixedSize(true);
+        recommendedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
 

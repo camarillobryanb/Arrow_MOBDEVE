@@ -8,7 +8,7 @@
     tools:context=".LoginActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/login" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -33,23 +33,23 @@
         android:lineSpacingExtra="-15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_login" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_newacc"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/createaccount_button"
         android:fontFamily="@font/poppins_semibold"
         android:text="Create Account"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_gologin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_gologin"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="80dp"
@@ -57,7 +57,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="LOGIN"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

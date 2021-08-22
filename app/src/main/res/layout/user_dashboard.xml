@@ -27,7 +27,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Arrow"
             android:textColor="@color/green"
-            android:textSize="20" />
+            android:textSize="20dp" />
 
 
         <ImageView

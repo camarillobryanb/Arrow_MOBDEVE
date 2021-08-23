@@ -23,7 +23,6 @@ import java.util.Collections;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextView tvLogin;
     private EditText etRegEmail;
     private EditText etRegPassword;
     private Button btnSubmit;
@@ -47,20 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        this.tvLogin = findViewById(R.id.tv_reg_login);
         this.etRegEmail = findViewById(R.id.et_reg_email);
         this.etRegPassword = findViewById(R.id.et_reg_password);
         this.btnSubmit = findViewById(R.id.btn_submit);
         this.pbRegister = findViewById(R.id.pb_register);
-
-        this.tvLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
         this.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

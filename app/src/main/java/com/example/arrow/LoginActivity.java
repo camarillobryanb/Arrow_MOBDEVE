@@ -12,6 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,16 +25,19 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnGoogle;
     private TextView tvRegister;
     private ProgressBar pbLogin;
 
     // Firebase
     private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
+        createRequest();
         this.initFirebase();
         this.initComponents();
     }
@@ -44,17 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         this.etEmail = findViewById(R.id.et_email);
         this.etPassword = findViewById(R.id.et_password);
         this.btnLogin = findViewById(R.id.btn_login);
+        this.btnGoogle = findViewById(R.id.btn_google);
         this.tvRegister = findViewById(R.id.tv_register);
         this.pbLogin = findViewById(R.id.pb_login);
-
-        this.tvRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
 
         this.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +64,32 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        this.btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        this.tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
+    private void createRequest() {
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("438315523124-s1i6rggs4fd92ecv6s8hgbmm81u50phn.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+
+        this.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
     private void signIn(String email, String password) {

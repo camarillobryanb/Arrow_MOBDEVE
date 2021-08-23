@@ -33,7 +33,7 @@
             android:textSize="20sp" />
 
         <RatingBar
-            android:id="@+id/mv_rating"
+            android:id="@+id/overall_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.RatingBar.Small"
@@ -47,7 +47,7 @@
             android:id="@+id/mv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/mv_rating"
+            android:layout_below="@id/overall_rating"
             android:layout_toRightOf="@id/mv_image"
             android:fontFamily="@font/open_sans"
             android:padding="10dp"

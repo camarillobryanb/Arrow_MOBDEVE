@@ -53,7 +53,7 @@ public class OnBoardingAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.activity_main, container, false);
+        View view = layoutInflater.inflate(R.layout.layout_screen, container, false);
 
         ImageView imageView = view.findViewById(R.id.iv_mainpic);
         TextView heading = view.findViewById(R.id.tv_header);

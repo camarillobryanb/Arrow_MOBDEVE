@@ -61,14 +61,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
-                signIn(email, password);
+                if (!checkEmpty(email, password)){
+                    signIn(email, password);
+                }
             }
         });
     }
 
     private void signIn(String email, String password) {
         this.pbLogin.setVisibility(View.VISIBLE);
-
         this.mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -83,6 +84,19 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private boolean checkEmpty(String email, String password) {
+        boolean hasEmpty = false;
+        if (email.isEmpty()){
+            this.etEmail.setError("Required Field");
+            this.etEmail.requestFocus();
+            hasEmpty = true;
+        } else if (password.isEmpty()){
+            this.etPassword.setError("Required Field");
+            hasEmpty = true;
+        }
+        return hasEmpty;
     }
 
     private void loginFailed() {

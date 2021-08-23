@@ -86,7 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
             this.etRegPassword.setError("Required Field");
             hasEmpty = true;
         }
-
         return hasEmpty;
     }
 

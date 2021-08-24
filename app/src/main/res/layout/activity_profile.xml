@@ -110,7 +110,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/myFeat_Recycler"
             android:layout_width="376dp"
-            android:layout_height="197dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/my_feat_profs"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="0dp" />
@@ -150,11 +150,10 @@
                 android:textSize="12sp" />
 
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myCurr_Recycler"
                 android:layout_width="376dp"
-                android:layout_height="197dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/my_curr_profs"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="0dp" />

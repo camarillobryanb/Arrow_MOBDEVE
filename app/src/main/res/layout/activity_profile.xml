@@ -1,18 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".userDashboard">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_icon" />
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Arrow"
+            android:textColor="@color/green"
+            android:textSize="20dp" />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:src="@drawable/profile_icon" />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="My Profile"
+            android:textColor="@color/black"
+            android:textSize="22dp" />
+
+
+
+
+    </RelativeLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:text="This ia test View File, feel free 2 change"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_feat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+
+            android:id="@+id/my_feat_profs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="My Featured Professors"
+            android:textAllCaps="true"
+            android:textColor="@color/green"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/edit_feat_profs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/my_feat_profs"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Add"
+            android:textAllCaps="true"
+            android:textColor="@color/darker_gray"
+            android:textSize="12sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myFeat_Recycler"
+            android:layout_width="376dp"
+            android:layout_height="197dp"
+            android:layout_below="@id/my_feat_profs"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp" />
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_current"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/my_curr_profs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="My Current Professors"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="22sp" />
+
+
+            <TextView
+                android:id="@+id/edit_curr_profs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/my_curr_profs"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/open_sans"
+                android:text="ADD"
+                android:textAllCaps="true"
+                android:textColor="@color/darker_gray"
+                android:textSize="12sp" />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myCurr_Recycler"
+                android:layout_width="376dp"
+                android:layout_height="197dp"
+                android:layout_below="@id/my_curr_profs"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp" />
+
+        </RelativeLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</ScrollView>
+
+
+</LinearLayout>

@@ -1,7 +1,11 @@
 package com.example.arrow;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +23,10 @@ public class userDashboard extends AppCompatActivity {
 
     RecyclerView.Adapter adapter;
 
+    TextView tv_viewAllCollegeProfs;
+    TextView tv_viewAllCurrentProfs;
+    LinearLayout ll_viewAllRecommendedProfs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +39,51 @@ public class userDashboard extends AppCompatActivity {
         CurrentProfessorsRecycler = findViewById(R.id.current_profs_recycler);
 
 
+        //Adapter per section
         recommendedProfessors();
         yourCollegeProfessors();
         CurrentProfessors();
 
+        //Onclick of View All buttons
+        this.viewAllCollegeProfs();
+        this.viewAllCurrentProfs();
+        this.viewAllRecommendedProfs();
+    }
 
+    private void viewAllCollegeProfs() {
+        this.tv_viewAllCollegeProfs = findViewById(R.id.tv_viewcollegeprofs);
+        this.tv_viewAllCollegeProfs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(userDashboard.this, AllCollegeProfs.class);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
+    private void viewAllCurrentProfs() {
+        this.tv_viewAllCurrentProfs = findViewById(R.id.tv_viewcurrentprofs);
+        this.tv_viewAllCurrentProfs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(userDashboard.this, AllCurrentProfs.class);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
+    private void viewAllRecommendedProfs() {
+        this.ll_viewAllRecommendedProfs = findViewById(R.id.featured_background);
+        this.ll_viewAllRecommendedProfs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(userDashboard.this, AllRecommendedProfs.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     private void recommendedProfessors() {
@@ -45,6 +93,9 @@ public class userDashboard extends AppCompatActivity {
         ArrayList<RecommendedHelperClass> recProfs = new ArrayList<>();
 
         recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
+        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Team Sports Professor"));
+        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "History Professor"));
+
 
         adapter = new RecommendedAdapter(recProfs);
         recommendedRecycler.setAdapter(adapter);
@@ -54,11 +105,28 @@ public class userDashboard extends AppCompatActivity {
     private void yourCollegeProfessors() {
         CollegeProfessorsRecycler.setHasFixedSize(true);
         CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        ArrayList<RecommendedHelperClass> collProfs = new ArrayList<>();
+
+        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
+        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor"));
+        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "History Professor"));
+
+        adapter = new CollegeProfAdapter(collProfs);
+        CollegeProfessorsRecycler.setAdapter(adapter);
 
     }
     private void CurrentProfessors() {
         CurrentProfessorsRecycler.setHasFixedSize(true);
-        recommendedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        CurrentProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        ArrayList<RecommendedHelperClass> currProfs = new ArrayList<>();
+
+        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
+        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Philosophy Professor"));
+        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor"));
+
+
+        adapter = new CollegeProfAdapter(currProfs);
+        CurrentProfessorsRecycler.setAdapter(adapter);
     }
 
 

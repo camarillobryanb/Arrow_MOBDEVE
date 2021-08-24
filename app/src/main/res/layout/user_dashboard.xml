@@ -161,6 +161,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/tv_viewcollegeprofs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -202,6 +203,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/tv_viewcurrentprofs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

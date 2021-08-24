@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
+                            Intent i = new Intent(LoginActivity.this, userDashboard.class);
                             pbLogin.setVisibility(View.GONE);
                             startActivity(i);
                             finish();

@@ -24,6 +24,14 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".userDashboard">
+        </activity>
+        <activity android:name=".AllCollegeProfs">
+        </activity>
+        <activity android:name=".AllCurrentProfs">
+        </activity>
+        <activity android:name=".AllRecommendedProfs">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

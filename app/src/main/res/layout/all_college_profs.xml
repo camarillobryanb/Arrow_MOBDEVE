@@ -79,7 +79,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dataList"
+            android:id="@+id/allCollege_Recycler"
             android:layout_width="match_parent"
             android:layout_height="589dp"
             android:layout_alignParentStart="true"

@@ -1,9 +1,12 @@
 package com.example.arrow;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +16,9 @@ import java.util.*;
 
 public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.FeaturedViewHolder>{
     ArrayList<RecommendedHelperClass> cardProfs;
+    public static final String KEY_NAME = "KEY_NAME";
+    public static final String KEY_IMG = "KEY_IMG";
+    public static final String KEY_DESC = "KEY_DESC";
 
     public AllCardsAdapter(ArrayList<RecommendedHelperClass> cardProfs) {
         this.cardProfs = cardProfs;
@@ -22,7 +28,7 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
 
         ImageView image;
         TextView name, desc;
-
+        LinearLayout ll_card;
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -30,6 +36,7 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
             image = itemView.findViewById(R.id.featured_image);
             name = itemView.findViewById(R.id.featured_name);
             desc = itemView.findViewById(R.id.featured_desc);
+            ll_card = itemView.findViewById(R.id.ll_allcard);
 
         }
     }
@@ -50,6 +57,17 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
         holder.image.setImageResource(recommendedHelperClass.getImage());
         holder.name.setText(recommendedHelperClass.getName());
         holder.desc.setText(recommendedHelperClass.getDescription());
+        holder.ll_card.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProfessorProfile.class);
+                intent.putExtra(KEY_NAME, cardProfs.get(position).getName());
+                intent.putExtra(KEY_IMG, cardProfs.get(position).getImage());
+                intent.putExtra(KEY_DESC, cardProfs.get(position).getDescription());
+                v.getContext().startActivity(intent);
+            }
+        });
 
     }
 

@@ -6,7 +6,9 @@
     app:cardCornerRadius="2dp"
     app:cardElevation="8dp"
     android:layout_margin="10dp">
+
     <RelativeLayout
+        android:id="@+id/rl_coll_card"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:padding="10dp">
@@ -15,8 +17,8 @@
             android:id="@+id/mv_image"
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:src="@drawable/prof_sample"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/prof_sample" />
 
         <TextView
             android:id="@+id/mv_title"
@@ -34,13 +36,13 @@
 
         <RatingBar
             android:id="@+id/overall_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_below="@id/mv_title"
-            android:layout_toRightOf="@id/mv_image"
             android:layout_marginLeft="10dp"
-            android:rating="4.5"/>
+            android:layout_toRightOf="@id/mv_image"
+            android:rating="4.5" />
 
 
         <TextView

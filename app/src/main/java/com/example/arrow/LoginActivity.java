@@ -102,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                             Intent i = new Intent(LoginActivity.this, userDashboard.class);
                             pbLogin.setVisibility(View.GONE);
                             startActivity(i);
-                            finish();
                         } else {
                             loginFailed();
                         }

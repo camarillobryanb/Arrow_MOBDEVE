@@ -151,10 +151,11 @@
                     android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_Recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
 
-                    android:layout_below="@+id/Comment_title"/>
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/Comment_title" />
 
 
 

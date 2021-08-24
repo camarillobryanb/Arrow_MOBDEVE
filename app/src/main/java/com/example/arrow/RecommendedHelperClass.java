@@ -1,5 +1,8 @@
 package com.example.arrow;
 
+import android.view.View;
+import android.widget.LinearLayout;
+
 public class RecommendedHelperClass {
     int image;
     String name,description;
@@ -34,4 +37,5 @@ public class RecommendedHelperClass {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

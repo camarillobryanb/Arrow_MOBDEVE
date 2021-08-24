@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class userDashboard extends AppCompatActivity {
     LinearLayout ll_recProfessor;
     RelativeLayout rl_collProfessor;
 
+    ImageView ivMyProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,33 +54,20 @@ public class userDashboard extends AppCompatActivity {
         this.viewAllCollegeProfs();
         this.viewAllCurrentProfs();
         this.viewAllRecommendedProfs();
-//        this.viewRecProfessor();
-//        this.viewCollProfessor();
+        this.viewMyProfile();
     }
 
-//    private void viewRecProfessor() {
-//        this.ll_recProfessor = findViewById(R.id.ll_rec_card);
-//
-//        this.ll_recProfessor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(userDashboard.this, ProfessorProfile.class);
-//                startActivity(i);
-//            }
-//        });
-//    }
-//
-//    private void viewCollProfessor () {
-//        this.rl_collProfessor = findViewById(R.id.rl_coll_card);
-//
-//        this.rl_collProfessor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(userDashboard.this, ProfessorProfile.class);
-//                startActivity(i);
-//            }
-//        });
-//    }
+
+    private void viewMyProfile() {
+        this.ivMyProfile = findViewById(R.id.iv_profile);
+        this.ivMyProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(userDashboard.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+    }
 
     private void viewAllCollegeProfs() {
         this.tv_viewAllCollegeProfs = findViewById(R.id.tv_viewcollegeprofs);

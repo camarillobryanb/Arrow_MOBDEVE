@@ -16,13 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="true" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
-
         </activity>
         <activity android:name=".userDashboard">
         </activity>
@@ -33,6 +29,7 @@
         <activity android:name=".AllRecommendedProfs">
         </activity>
         <activity android:name=".ProfessorProfile"></activity>
+        <activity android:name=".ProfileActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

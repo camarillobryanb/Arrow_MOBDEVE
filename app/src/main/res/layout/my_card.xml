@@ -8,8 +8,6 @@
     app:cardElevation="8dp">
 
 
-
-
     <LinearLayout
         android:id="@+id/ll_allcard"
         android:layout_width="match_parent"

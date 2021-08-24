@@ -113,7 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(this, "User Registration Success", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(i);
-        finish();
     }
 
     private void failedRegistration() {

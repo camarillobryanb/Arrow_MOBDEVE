@@ -57,7 +57,6 @@ public class userDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(userDashboard.this, AllCollegeProfs.class);
                 startActivity(i);
-                finish();
             }
         });
     }
@@ -69,7 +68,6 @@ public class userDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(userDashboard.this, AllCurrentProfs.class);
                 startActivity(i);
-                finish();
             }
         });
     }
@@ -81,7 +79,6 @@ public class userDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(userDashboard.this, AllRecommendedProfs.class);
                 startActivity(i);
-                finish();
             }
         });
     }

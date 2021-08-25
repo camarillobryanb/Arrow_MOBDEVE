@@ -51,12 +51,23 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/profileName"
+            android:id="@+id/profile_firstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="My Profile"
+            android:text="Jane"
+            android:textColor="@color/black"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/profile_lastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/profile_firstName"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Dela Cruz"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
@@ -67,7 +78,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/open_sans"
-            android:layout_toRightOf="@id/profileName"
+            android:layout_toRightOf="@id/profile_lastName"
             android:text="LOG OUT"
             android:textColor="@color/darker_gray"
             android:textSize="12dp" />

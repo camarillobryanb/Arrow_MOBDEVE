@@ -26,7 +26,7 @@
         android:background="@drawable/input_reg_background"
         android:ems="10"
         android:fontFamily="@font/poppins"
-        android:hint="DLSU Email"
+        android:hint="juan_delacruz@dlsu.edu.ph"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="10dp"
@@ -42,13 +42,13 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/input_reg_background"
         android:ems="10"
-        android:hint="Password"
+        android:hint="••••••••"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -80,9 +80,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
         android:layout_marginTop="140dp"
-        android:text="Email Address"
+        android:layout_marginEnd="140dp"
+        android:text="Email Address*"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_reg_header" />
 
@@ -90,9 +91,10 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
         android:layout_marginTop="10dp"
-        android:text="Password"
+        android:layout_marginEnd="160dp"
+        android:text="Password*"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_reg_email" />
 

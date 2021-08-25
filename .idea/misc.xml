@@ -22,6 +22,8 @@
         <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/activity_onboard.xml" value="0.371875" />
         <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/activity_profile.xml" value="0.371875" />
         <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/activity_register.xml" value="0.371875" />
+        <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/activity_register2.xml" value="0.371875" />
+        <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/activity_register3.xml" value="0.371875" />
         <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/layout_screen.xml" value="0.371875" />
         <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/rec_card_view.xml" value="0.371875" />
         <entry key="..\:/Users/Bryan/Desktop/Arrow/Arrow_MOBDEVE/app/src/main/res/layout/test.xml" value="0.371875" />
@@ -34,5 +36,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.371875" />
+      </ProjectState>
+    </option>
   </component>
 </project>

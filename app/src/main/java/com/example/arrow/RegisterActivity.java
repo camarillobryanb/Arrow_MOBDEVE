@@ -2,6 +2,7 @@ package com.example.arrow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,8 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = etRegPassword.getText().toString().trim();
                 if (!checkEmpty(email, password)){
                     // Add a new user to DB
-                    User user = new User(email, password);
-                    storeUser(user);
+                    storeUser();
                 }
             }
         });
@@ -69,25 +69,30 @@ public class RegisterActivity extends AppCompatActivity {
         boolean hasEmpty = false;
         if (email.isEmpty()){
             this.etRegEmail.setError("Required Field");
-            this.etRegEmail.requestFocus();
             hasEmpty = true;
         } else if (password.isEmpty()){
             this.etRegPassword.setError("Required Field");
             hasEmpty = true;
         }
+        if (!email.contains("dlsu.edu.ph")){
+            this.etRegEmail.setError("Requires DLSU Email");
+            this.etRegEmail.requestFocus();
+            hasEmpty = true;
+        }
         return hasEmpty;
     }
 
-    private void storeUser(User user) {
+    private void storeUser() {
         this.pbRegister.setVisibility(View.VISIBLE);
 
         // Register to Firebase
-        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+        mAuth.createUserWithEmailAndPassword(etRegEmail.getText().toString().trim(), etRegPassword.getText().toString().trim())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
 
+                            /*
                             database.getReference("users")
                                     .child(mAuth.getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -100,6 +105,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+                             */
+
+                            successfulRegistration();
 
                         } else {
                             failedRegistration();
@@ -110,8 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void successfulRegistration() {
         this.pbRegister.setVisibility(View.GONE);
-        Toast.makeText(this, "User Registration Success", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent i = new Intent(RegisterActivity.this, Register2Activity.class);
+        i.putExtra("UID", this.mAuth.getUid());
+        i.putExtra("EMAIL", etRegEmail.getText().toString().trim());
+        i.putExtra("PASSWORD", etRegPassword.getText().toString().trim());
         startActivity(i);
     }
 

@@ -18,6 +18,34 @@
 
     <string name="third_question"> How was the grading criteria? </string>
 
+    <string-array name="colleges">
+        <item>CCS</item>
+        <item>COB</item>
+        <item>CED</item>
+        <item>COS</item>
+        <item>CLA</item>
+        <item>COS</item>
+        <item>SOE</item>
+    </string-array>
 
+    <string-array name="synchronous">
+        <item>None</item>
+        <item>Few Sessions</item>
+        <item>Balanced</item>
+        <item>More Synchronous</item>
+        <item>Pure Synchronous</item>
+    </string-array>
 
+    <string-array name="attendance">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="grading">
+        <item>Pure Output-based</item>
+        <item>More Output</item>
+        <item>Balanced</item>
+        <item>More Exams</item>
+        <item>Pure Exams</item>
+    </string-array>
 </resources>

@@ -32,6 +32,7 @@ public class userDashboard extends AppCompatActivity {
     RelativeLayout rl_collProfessor;
 
     ImageView ivMyProfile;
+    ImageView ivSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class userDashboard extends AppCompatActivity {
         this.viewAllCurrentProfs();
         this.viewAllRecommendedProfs();
         this.viewMyProfile();
+        this.searchResults();
     }
 
 
@@ -64,6 +66,17 @@ public class userDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(userDashboard.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void searchResults() {
+        this.ivSearch = findViewById(R.id.iv_search);
+        this.ivSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(userDashboard.this, SearchResultsActivity.class);
                 startActivity(i);
             }
         });

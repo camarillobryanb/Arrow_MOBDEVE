@@ -100,7 +100,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/allRecommended_Recycler"
+            android:id="@+id/searchResults_Recycler"
             android:layout_width="match_parent"
             android:layout_height="589dp"
             android:layout_alignParentTop="true"

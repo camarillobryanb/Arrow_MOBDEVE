@@ -28,6 +28,8 @@
         <activity android:name=".AllRecommendedProfs"></activity>
         <activity android:name=".ProfessorProfile" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".SearchResultsActivity"/>
+        <activity android:name=".SubmitRequestActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -50,7 +50,7 @@ public class AllCurrentProfs extends AppCompatActivity {
 
 
 
-        adapter = new RecommendedAdapter(currProfs);
+        adapter = new AllCardsAdapter(currProfs);
         currentProfsRecycler.setAdapter(adapter);
     }
 }

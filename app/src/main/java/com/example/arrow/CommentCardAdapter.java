@@ -21,7 +21,8 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
     public static class FeaturedViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView name;
+        TextView fName;
+        TextView lName;
         TextView course;
         TextView learning;
         TextView attendance;
@@ -33,7 +34,8 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
             super(itemView);
 
             //Hooks
-            name = itemView.findViewById(R.id.comment_name);
+            fName = itemView.findViewById(R.id.comment_first_name);
+            lName = itemView.findViewById(R.id.comment_last_name);
             course = itemView.findViewById(R.id.comment_course);
             learning = itemView.findViewById(R.id.learning_event);
             attendance = itemView.findViewById(R.id.attendance);
@@ -55,7 +57,8 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
 
         CommentHelperClass commentHelperClass = commentItem.get(position);
 
-        holder.name.setText(commentHelperClass.getName());
+        holder.fName.setText(commentHelperClass.getfName());
+        holder.lName.setText(commentHelperClass.getlName());
         holder.course.setText(commentHelperClass.getCourse());
         holder.learning.setText(commentHelperClass.getLearning());
         holder.attendance.setText(commentHelperClass.getAttendance());

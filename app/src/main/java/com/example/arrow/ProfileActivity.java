@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -14,6 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView rvFeaturedProfs;
     RecyclerView rvCurrentProfs;
     RecyclerView.Adapter adapter;
+    ImageView iv_home;
 
 
     @Override
@@ -27,8 +31,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         displayMyFeaturedProfessors();
         displayMyCurrentProfessors();
+        this.viewHome();
 
     }
+
+
+
 
     private void displayMyFeaturedProfessors() {
         rvFeaturedProfs.setHasFixedSize(true);
@@ -43,6 +51,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         adapter = new MyProfsAdapter(dataProfs);
         rvFeaturedProfs.setAdapter(adapter);
+    }
+
+    private void viewHome() {
+        this.iv_home= findViewById(R.id.iv_home);
+        this.iv_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this, userDashboard.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void displayMyCurrentProfessors() {

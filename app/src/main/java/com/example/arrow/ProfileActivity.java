@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -18,7 +22,11 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView rvCurrentProfs;
     RecyclerView.Adapter adapter;
     ImageView iv_home;
+    TextView tvLogout;
 
+    // Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +34,33 @@ public class ProfileActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile);
 
+        initFirebase();
+
         rvFeaturedProfs = findViewById(R.id.myFeat_Recycler);
         rvCurrentProfs = findViewById(R.id.myCurr_Recycler);
+
+        tvLogout = findViewById(R.id.logout_name);
 
         displayMyFeaturedProfessors();
         displayMyCurrentProfessors();
         this.viewHome();
 
+        tvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
 
-
-
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    }
 
     private void displayMyFeaturedProfessors() {
         rvFeaturedProfs.setHasFixedSize(true);
@@ -47,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         dataProfs.add(new MyCardHelperClass("Mrs. Santos", "Team Sports Professor" , R.drawable.prof_sample));
         dataProfs.add(new MyCardHelperClass("Mrs. Cruz", "IT Professor", R.drawable.prof_sample));
         dataProfs.add(new MyCardHelperClass("Mr. Perez", "History Professor", R.drawable.prof_sample));
-
 
         adapter = new MyProfsAdapter(dataProfs);
         rvFeaturedProfs.setAdapter(adapter);

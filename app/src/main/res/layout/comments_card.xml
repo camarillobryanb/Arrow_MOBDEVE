@@ -8,7 +8,7 @@
     android:layout_margin="10dp">
 
     <RelativeLayout
-        android:layout_width="386dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="10dp">
 
@@ -63,6 +63,19 @@
             android:rating="4.5" />
 
         <TextView
+            android:id="@+id/delete_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/overall_rating"
+            android:fontFamily="@font/open_sans"
+            android:text="Delete"
+            android:textColor="@color/darker_gray"
+            android:textSize="10sp" />
+
+
+        <TextView
             android:id="@+id/learning_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,9 +84,6 @@
             android:fontFamily="@font/open_sans_bold"
             android:text="Pure Synchronous"
             android:textColor="@color/green"
-
-
-
             android:textSize="8.5dp" />
 
         <TextView

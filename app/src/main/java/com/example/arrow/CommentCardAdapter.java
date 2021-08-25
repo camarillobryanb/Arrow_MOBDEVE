@@ -33,7 +33,7 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
             super(itemView);
 
             //Hooks
-            name = itemView.findViewById(R.id.comment_name);
+            name = itemView.findViewById(R.id.comment_first_name);
             course = itemView.findViewById(R.id.comment_course);
             learning = itemView.findViewById(R.id.learning_event);
             attendance = itemView.findViewById(R.id.attendance);

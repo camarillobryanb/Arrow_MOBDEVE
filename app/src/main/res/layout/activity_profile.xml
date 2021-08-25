@@ -78,8 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/open_sans"
             android:layout_toRightOf="@id/profile_lastName"
+            android:fontFamily="@font/open_sans"
             android:text="LOG OUT"
             android:textColor="@color/darker_gray"
             android:textSize="12dp" />

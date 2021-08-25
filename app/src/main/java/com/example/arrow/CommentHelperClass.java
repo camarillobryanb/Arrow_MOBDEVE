@@ -1,10 +1,11 @@
 package com.example.arrow;
 
 public class CommentHelperClass {
-    String name, course, learning, attendance, grading, review;
+    String fName, lName, course, learning, attendance, grading, review;
 
-    public CommentHelperClass(String name, String course, String learning, String attendance, String grading, String review) {
-        this.name = name;
+    public CommentHelperClass(String fName, String lName, String course, String learning, String attendance, String grading, String review) {
+        this.fName = fName;
+        this.lName = lName;
         this.course = course;
         this.learning = learning;
         this.attendance = attendance;
@@ -12,12 +13,12 @@ public class CommentHelperClass {
         this.review = review;
     }
 
-    public String getName() {
-        return name;
+    public String getfName() {
+        return fName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getlName() {
+        return lName;
     }
 
     public String getCourse() {

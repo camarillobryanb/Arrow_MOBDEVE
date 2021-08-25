@@ -12,7 +12,10 @@ public class User {
     private int attendance;
     private int grading;
 
-    public User(String email, String password, String fName, String lName, String college, int sync, int attendance, int grading) {
+    private int[] featured;
+    private int[] current;
+
+    public User(String email, String password, String fName, String lName, String college, int sync, int attendance, int grading, int[] featured, int[] current) {
         this.email = email;
         this.password = password;
         this.fName = fName;
@@ -53,5 +56,13 @@ public class User {
 
     public int getGrading() {
         return grading;
+    }
+
+    public int[] getFeatured() {
+        return featured;
+    }
+
+    public int[] getCurrent() {
+        return current;
     }
 }

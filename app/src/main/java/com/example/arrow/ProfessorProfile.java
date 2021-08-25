@@ -67,15 +67,15 @@ public class ProfessorProfile extends AppCompatActivity {
 
         ArrayList<CommentHelperClass> commentItem = new ArrayList<>();
 
-        commentItem.add(new CommentHelperClass("Jane Dela Cruz", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("Jane", "Dela Cruz", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("Juan Santos", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("Juan", "Santos", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("John Perez", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("John", "Perez", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("Peter Parker", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("Peter", "Parker", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("Tony Stark", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("Tony", "Stark", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
 
 

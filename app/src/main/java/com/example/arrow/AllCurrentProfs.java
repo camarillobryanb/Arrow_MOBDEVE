@@ -2,25 +2,48 @@ package com.example.arrow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
 public class AllCurrentProfs extends AppCompatActivity {
 
+    RecyclerView.Adapter adapter;
+    
+    private int featuredCount = 0;
+    private ArrayList<String> allFeatured = new ArrayList<String>();
+    
+    // Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+
+    // Views
+    ArrayList<MyCardHelperClass> dataProfs = new ArrayList<>();
+    
+    
     RecyclerView currentProfsRecycler;
     ImageView iv_home;
     ImageView iv_profile;
-
-    RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +52,27 @@ public class AllCurrentProfs extends AppCompatActivity {
         setContentView(R.layout.all_current_profs);
 
         //Hooks
-        currentProfsRecycler = findViewById(R.id.allCurrent_Recycler);
+        currentProfsRecycler = findViewById(R.id.allProfs_Recycler);
 
-        currentProfessors();
-
+        //currentProfessors();
 
         this.viewHome();
         this.viewProfile();
 
+        initFirebase();
+
+        currentProfsRecycler = findViewById(R.id.allProfs_Recycler);
+      
+        //displayAllProfessors();
 
     }
+
+
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    }
+
     private void viewHome() {
         this.iv_home= findViewById(R.id.iv_home);
         this.iv_home.setOnClickListener(new View.OnClickListener() {

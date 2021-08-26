@@ -7,22 +7,35 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class EditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Spinner sp_editCollege;
     ImageView iv_home;
     ImageView iv_profile;
     Spinner sp_changeProfile;
 
+    private EditText etFname;
+    private EditText etLname;
+    private Spinner sp_editCollege;
+    private Button btnSubmit;
+
     String[] avatars = { "Default", "Girl Icon", "Boy Icon" };
 
-
+    // Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +43,22 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.edit_profile);
 
+        initFirebase();
+
         this.viewHome();
         this.viewProfile();
+
+        etFname = findViewById(R.id.edit_firstName);
+        etLname = findViewById(R.id.edit_LastName);
+
+        btnSubmit = findViewById(R.id.btn_submitedit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUser();
+            }
+        });
+
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
         Spinner spin = (Spinner) findViewById(R.id.sp_changeProfile);
         spin.setOnItemSelectedListener(this);
@@ -41,6 +68,43 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
+
+        //Spinner for College
+        sp_editCollege = (Spinner) findViewById(R.id.sp_editCollege);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.colleges, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_editCollege.setAdapter(adapter);
+    }
+
+    private void updateUser() {
+        String fname = etFname.getText().toString().trim();
+        String lname = etLname.getText().toString().trim();
+        String college = sp_editCollege.getSelectedItem().toString();
+        if (!checkEmpty(fname, lname)){
+            DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid());
+            tempdb.child("fName").setValue(fname);
+            tempdb.child("lName").setValue(lname);
+            tempdb.child("college").setValue(college);
+            Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean checkEmpty(String fName, String lName) {
+        boolean hasEmpty = false;
+        if (fName.isEmpty()){
+            this.etFname.setError("Required Field");
+            this.etFname.requestFocus();
+            hasEmpty = true;
+        } else if (lName.isEmpty()){
+            this.etLname.setError("Required Field");
+            hasEmpty = true;
+        }
+        return hasEmpty;
+    }
+
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 
     //Performing action onItemSelected and onNothing selected
@@ -53,9 +117,6 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
-
-
-
 
     private void viewHome() {
         this.iv_home= findViewById(R.id.iv_home);

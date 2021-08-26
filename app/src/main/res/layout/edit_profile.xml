@@ -134,11 +134,11 @@
             android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/first_name"
-            android:layout_marginTop="5dp"
-            android:textSize="14dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans"
-            android:text="Jane" />
+            android:text="Jane"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/last_name"
@@ -180,13 +180,12 @@
             android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/College_Name"
-            android:layout_marginTop="5dp"
-            android:textSize="14dp"
             android:layout_marginLeft="16dp"
-            android:padding="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans"
-            android:text="CCS" />
-
+            android:padding="10dp"
+            android:text="CCS"
+            android:textSize="14dp" />
 
 
         <Button

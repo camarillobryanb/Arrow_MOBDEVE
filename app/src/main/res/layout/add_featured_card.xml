@@ -23,38 +23,42 @@
 
         <TextView
             android:id="@+id/featured_name"
-            android:layout_width="132dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:lineHeight="23dp"
-            android:text="Mrs. Dela Cruz"
+            android:text="Leo Deleon"
             android:textColor="@color/green"
-            android:textSize="20dp" />
+            android:textSize="17dp"/>
 
         <RatingBar
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:rating="3.5" />
 
         <TextView
             android:id="@+id/featured_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/open_sans"
-            android:text="Computer Science Professor" />
+            android:text="Computer Science Professor"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_addfeatured"
             android:layout_width="match_parent"
             android:layout_height="20dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/rounded_button"
             android:fontFamily="@font/poppins_semibold"
-            android:foregroundGravity="center"
-            android:padding="3dp"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center"
+            android:padding="2dp"
             android:text="@string/addButton"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="11sp" />
 
 
     </LinearLayout>

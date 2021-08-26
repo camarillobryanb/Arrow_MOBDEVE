@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 
@@ -26,6 +29,10 @@ public class ProfessorProfile extends AppCompatActivity {
     ImageView iv_home;
     ImageView commentButton;
 
+    // Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+
     RecyclerView.Adapter adapter;
 
     @Override
@@ -37,6 +44,7 @@ public class ProfessorProfile extends AppCompatActivity {
         //Hooks
         commentsRecycler = findViewById(R.id.comments_Recycler);
         name = findViewById(R.id.name);
+
 
         Intent intent = getIntent();
 

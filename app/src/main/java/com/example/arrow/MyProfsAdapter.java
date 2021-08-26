@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ public class MyProfsAdapter extends RecyclerView.Adapter<MyProfsAdapter.Featured
     String KEY_NAME = "KEY_NAME";
     String KEY_IMG = "KEY_IMG";
     String KEY_DESC = "KEY_DESC";
+    String KEY_RATING = "KEY_RATING";
 
     public MyProfsAdapter(ArrayList<MyCardHelperClass> dataProfs) {
         this.dataProfs = dataProfs;
@@ -28,6 +30,7 @@ public class MyProfsAdapter extends RecyclerView.Adapter<MyProfsAdapter.Featured
         ImageView image;
         TextView name, desc;
         LinearLayout ll_professor;
+        RatingBar rbRating;
 
 
         public FeaturedViewHolder(@NonNull View itemView) {
@@ -38,6 +41,7 @@ public class MyProfsAdapter extends RecyclerView.Adapter<MyProfsAdapter.Featured
             name = itemView.findViewById(R.id.featured_name);
             desc = itemView.findViewById(R.id.featured_desc);
             ll_professor = itemView.findViewById(R.id.ll_allcard);
+            rbRating = itemView.findViewById(R.id.rb_rating);
         }
     }
 
@@ -58,6 +62,7 @@ public class MyProfsAdapter extends RecyclerView.Adapter<MyProfsAdapter.Featured
         holder.image.setImageResource(myCardHelperClass.getImage());
         holder.name.setText(myCardHelperClass.getName());
         holder.desc.setText(myCardHelperClass.getDescription());
+        holder.rbRating.setRating(myCardHelperClass.getRating());
         holder.ll_professor.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -66,6 +71,7 @@ public class MyProfsAdapter extends RecyclerView.Adapter<MyProfsAdapter.Featured
                 intent.putExtra(KEY_NAME, dataProfs.get(position).getName());
                 intent.putExtra(KEY_IMG, dataProfs.get(position).getImage());
                 intent.putExtra(KEY_DESC, dataProfs.get(position).getDescription());
+                intent.putExtra(KEY_RATING, dataProfs.get(position).getRating());
                 v.getContext().startActivity(intent);
             }
         });

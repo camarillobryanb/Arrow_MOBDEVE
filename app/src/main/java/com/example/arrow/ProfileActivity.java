@@ -180,8 +180,9 @@ public class ProfileActivity extends AppCompatActivity {
                         String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                         String lname = String.valueOf(snapshot.child("lName").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
+                        int rating = Integer.parseInt(String.valueOf(snapshot.child("overallRating").getValue()));
 
-                        dataProfs.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample));
+                        dataProfs.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample, rating));
 
                         adapter = new MyProfsAdapter(dataProfs);
                         rvFeaturedProfs.setAdapter(adapter);

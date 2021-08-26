@@ -63,12 +63,11 @@ public class ProfileActivity extends AppCompatActivity {
         changeHeading();
 
         rvFeaturedProfs = findViewById(R.id.myFeat_Recycler);
-        rvCurrentProfs = findViewById(R.id.myCurr_Recycler);
 
         tvLogout = findViewById(R.id.logout_name);
 
         displayMyFeaturedProfessors();
-        displayMyCurrentProfessors();
+        // displayMyCurrentProfessors();
 
         this.viewAddFeaturedPage();
         this.viewHome();

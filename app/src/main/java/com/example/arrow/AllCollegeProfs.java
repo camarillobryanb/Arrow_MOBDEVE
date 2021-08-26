@@ -1,7 +1,10 @@
 package com.example.arrow;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +15,9 @@ import java.util.ArrayList;
 
 
 public class AllCollegeProfs extends AppCompatActivity {
+
+    ImageView iv_home;
+    ImageView iv_profile;
 
     RecyclerView collegeProfsRecycler;
 
@@ -27,9 +33,34 @@ public class AllCollegeProfs extends AppCompatActivity {
         collegeProfsRecycler = findViewById(R.id.allCollege_Recycler);
 
         collegeProfessors();
+        this.viewHome();
+        this.viewProfile();
 
 
     }
+    private void viewHome() {
+        this.iv_home= findViewById(R.id.iv_home);
+        this.iv_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AllCollegeProfs.this, userDashboard.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void viewProfile() {
+        this.iv_profile= findViewById(R.id.iv_profile);
+        this.iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AllCollegeProfs.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+
 
     private void collegeProfessors() {
         collegeProfsRecycler.setHasFixedSize(true);

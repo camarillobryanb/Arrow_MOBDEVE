@@ -15,6 +15,7 @@
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/iv_home"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
@@ -32,6 +33,7 @@
 
 
         <ImageView
+            android:id="@+id/iv_profile"
             android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_alignParentRight="true"
@@ -129,13 +131,14 @@
                             android:fontFamily="@font/open_sans_semibold"
                             android:text="Add Review..." />
 
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="23dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="19dp"
-                            android:src="@drawable/review_button" />
+                    <ImageView
+                        android:id="@+id/commentButton"
+                        android:layout_width="26dp"
+                        android:layout_height="23dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="19dp"
+                        android:src="@drawable/review_button" />
 
                     </RelativeLayout>
 

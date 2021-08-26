@@ -1,9 +1,12 @@
 package com.example.arrow;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,9 @@ public class ProfessorProfile extends AppCompatActivity {
     RecyclerView commentsRecycler;
     TextView name;
     ImageView img;
+    ImageView iv_profile;
+    ImageView iv_home;
+    ImageView commentButton;
 
     RecyclerView.Adapter adapter;
 
@@ -59,7 +65,45 @@ public class ProfessorProfile extends AppCompatActivity {
         commentsReview();
 
 
+        this.viewHome();
+        this.viewProfile();
+        this.rateProf();
+
+
     }
+    private void viewHome() {
+        this.iv_home= findViewById(R.id.iv_home);
+        this.iv_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfessorProfile.this, userDashboard.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void viewProfile() {
+        this.iv_profile= findViewById(R.id.iv_profile);
+        this.iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfessorProfile.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void rateProf() {
+        this.commentButton= findViewById(R.id.commentButton);
+        this.commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfessorProfile.this, RateProfessor.class);
+                startActivity(i);
+            }
+        });
+    }
+
 
     private void commentsReview() {
         commentsRecycler.setHasFixedSize(true);

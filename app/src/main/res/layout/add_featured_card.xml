@@ -28,7 +28,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Leo Deleon"
             android:textColor="@color/green"
-            android:textSize="17dp"/>
+            android:textSize="19dp"/>
 
         <RatingBar
             style="@style/Widget.AppCompat.RatingBar.Small"

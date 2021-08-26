@@ -145,45 +145,7 @@
         <RelativeLayout
             android:id="@+id/rl_current"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <TextView
-                android:id="@+id/my_curr_profs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="My Current Professors"
-                android:textAllCaps="true"
-                android:textColor="@color/green"
-                android:textSize="22sp" />
-
-
-            <TextView
-                android:id="@+id/edit_curr_profs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/my_curr_profs"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="18dp"
-                android:fontFamily="@font/open_sans"
-                android:text="ADD"
-                android:textAllCaps="true"
-                android:textColor="@color/darker_gray"
-                android:textSize="12sp" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myCurr_Recycler"
-                android:layout_width="376dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/my_curr_profs"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp" />
-
-        </RelativeLayout>
+            android:layout_height="match_parent"/>
 
 
 

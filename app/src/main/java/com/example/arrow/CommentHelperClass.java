@@ -13,6 +13,48 @@ public class CommentHelperClass {
         this.review = review;
     }
 
+    public CommentHelperClass(String fName, String lName, String course, int rLearning, int rAttendance, int rGrade, String review) {
+        this.fName = fName;
+        this.lName = lName;
+        this.course = course;
+
+        if(rLearning == 1)
+            this.learning = "Pure Asynchronous";
+        if(rLearning == 2)
+            this.learning = "More Asynchronous";
+        if(rLearning == 3)
+            this.learning = "Balanced";
+        if(rLearning == 4)
+            this.learning = "More Synchronous";
+        if(rLearning == 5)
+            this.learning = "Pure Synchronous";
+
+
+        if(rAttendance == 1)
+            this.attendance = "Attendance Not Required";
+        if(rAttendance == 2)
+            this.attendance = "Attendance Encouraged";
+        if(rAttendance == 3)
+            this.attendance = "Attendance Graded";
+        if(rAttendance == 4)
+            this.attendance = "Important Attendance";
+        if(rAttendance == 5)
+            this.attendance = "Attendance Required";
+
+        if(rGrade == 1)
+            this.grading = "Pure Output-Based";
+        if(rGrade == 2)
+            this.grading = "More Output-Based";
+        if(rGrade == 3)
+            this.grading = "Balanced Exams and Output";
+        if(rGrade == 4)
+            this.grading = "More Exams";
+        if(rGrade == 5)
+            this.grading = "Pure Exams";
+
+        this.review = review;
+    }
+
     public String getfName() {
         return fName;
     }

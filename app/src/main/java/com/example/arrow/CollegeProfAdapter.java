@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class CollegeProfAdapter extends RecyclerView.Adapter<CollegeProfAdapter.
     public static final String KEY_NAME = "KEY_NAME";
     public static final String KEY_IMG = "KEY_IMG";
     public static final String KEY_DESC = "KEY_DESC";
+    public static final String KEY_RATING = "KEY_RATING";
 
     public CollegeProfAdapter(ArrayList<RecommendedHelperClass> collProfs) {
         this.collProfs = collProfs;
@@ -28,6 +30,7 @@ public class CollegeProfAdapter extends RecyclerView.Adapter<CollegeProfAdapter.
         ImageView image;
         TextView name, desc;
         RelativeLayout rl_card;
+        RatingBar rbRating;
 
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -37,6 +40,7 @@ public class CollegeProfAdapter extends RecyclerView.Adapter<CollegeProfAdapter.
             name = itemView.findViewById(R.id.mv_title);
             desc = itemView.findViewById(R.id.mv_desc);
             rl_card = itemView.findViewById(R.id.rl_coll_card);
+            rbRating = itemView.findViewById(R.id.overall_rating);
 
 
         }
@@ -58,6 +62,7 @@ public class CollegeProfAdapter extends RecyclerView.Adapter<CollegeProfAdapter.
         holder.image.setImageResource(recommendedHelperClass.getImage());
         holder.name.setText(recommendedHelperClass.getName());
         holder.desc.setText(recommendedHelperClass.getDescription());
+        holder.rbRating.setRating(recommendedHelperClass.getRating());
         holder.rl_card.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -66,6 +71,7 @@ public class CollegeProfAdapter extends RecyclerView.Adapter<CollegeProfAdapter.
                 intent.putExtra(KEY_NAME, collProfs.get(position).getName());
                 intent.putExtra(KEY_IMG, collProfs.get(position).getImage());
                 intent.putExtra(KEY_DESC, collProfs.get(position).getDescription());
+                intent.putExtra(KEY_RATING, collProfs.get(position).getRating());
                 v.getContext().startActivity(intent);
             }
         });

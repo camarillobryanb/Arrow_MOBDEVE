@@ -30,15 +30,15 @@ public class AllCurrentProfs extends AppCompatActivity {
 
     RecyclerView.Adapter adapter;
     
-    private int featuredCount = 0;
-    private ArrayList<String> allFeatured = new ArrayList<String>();
+    private int collegeProfessorsCount = 0;
+    private ArrayList<String> allProfs = new ArrayList<String>();
     
     // Firebase
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
     // Views
-    ArrayList<MyCardHelperClass> dataProfs = new ArrayList<>();
+    ArrayList<RecommendedHelperClass> dataProfs = new ArrayList<>();
     
     
     RecyclerView currentProfsRecycler;
@@ -54,16 +54,15 @@ public class AllCurrentProfs extends AppCompatActivity {
         //Hooks
         currentProfsRecycler = findViewById(R.id.allProfs_Recycler);
 
-        //currentProfessors();
+//        currentProfessors();
 
         this.viewHome();
         this.viewProfile();
 
         initFirebase();
 
-        currentProfsRecycler = findViewById(R.id.allProfs_Recycler);
-      
-        //displayAllProfessors();
+        getCollegeProfessorsCount();
+
 
     }
 
@@ -95,27 +94,47 @@ public class AllCurrentProfs extends AppCompatActivity {
         });
     }
 
+    private void getCollegeProfessorsCount() {
+        database.getReference().child("professors")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
+                        displayCollegeProfs();
+                    }
 
-    private void currentProfessors() {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void displayCollegeProfs() {
         currentProfsRecycler.setHasFixedSize(true);
         currentProfsRecycler.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
 
-        ArrayList<RecommendedHelperClass> currProfs = new ArrayList<>();
+        for (int i = 1; i <= collegeProfessorsCount; i++){
+            database.getReference().child("professors").child(String.format("%07d", i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
 
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Team Sports Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "History Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Team Sports Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "History Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Team Sports Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "History Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
+                        String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                        String lname = String.valueOf(snapshot.child("lName").getValue());
+                        String college = String.valueOf(snapshot.child("college").getValue());
+                        float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
 
+                        dataProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college,  rating));
 
-
-        adapter = new AllCardsAdapter(currProfs);
-        currentProfsRecycler.setAdapter(adapter);
+                        adapter = new AllCardsAdapter(dataProfs);
+                        currentProfsRecycler.setAdapter(adapter);
+                    }
+                }
+            });
+        }
     }
 }

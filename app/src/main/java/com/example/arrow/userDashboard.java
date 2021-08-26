@@ -125,9 +125,9 @@ public class userDashboard extends AppCompatActivity {
 
         ArrayList<RecommendedHelperClass> recProfs = new ArrayList<>();
 
-        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Team Sports Professor"));
-        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "History Professor"));
+        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor", Float.parseFloat("4.3")));
+        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Philosophy Professor", Float.parseFloat("2.5")));
+        recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor", Float.parseFloat("3.7")));
 
 
         adapter = new RecommendedAdapter(recProfs);
@@ -140,9 +140,9 @@ public class userDashboard extends AppCompatActivity {
         CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ArrayList<RecommendedHelperClass> collProfs = new ArrayList<>();
 
-        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor"));
-        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "History Professor"));
+        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor", Float.parseFloat("4.3")));
+        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Philosophy Professor", Float.parseFloat("2.5")));
+        collProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor", Float.parseFloat("3.7")));
 
         adapter = new CollegeProfAdapter(collProfs);
         CollegeProfessorsRecycler.setAdapter(adapter);
@@ -153,9 +153,9 @@ public class userDashboard extends AppCompatActivity {
         CurrentProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ArrayList<RecommendedHelperClass> currProfs = new ArrayList<>();
 
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Philosophy Professor"));
-        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor"));
+        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor", Float.parseFloat("4.3")));
+        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Philosophy Professor", Float.parseFloat("2.5")));
+        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "Team Sports Professor", Float.parseFloat("3.7")));
 
 
         adapter = new CollegeProfAdapter(currProfs);

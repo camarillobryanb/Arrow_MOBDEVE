@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class ProfessorProfile extends AppCompatActivity {
     ImageView iv_profile;
     ImageView iv_home;
     ImageView commentButton;
+    RatingBar rbRating;
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -44,6 +46,7 @@ public class ProfessorProfile extends AppCompatActivity {
         //Hooks
         commentsRecycler = findViewById(R.id.comments_Recycler);
         name = findViewById(R.id.name);
+        rbRating = findViewById(R.id.prof_rating);
 
 
         Intent intent = getIntent();
@@ -57,6 +60,17 @@ public class ProfessorProfile extends AppCompatActivity {
             profname = intent.getStringExtra(RecommendedAdapter.KEY_NAME);
 
         this.name.setText(profname);
+
+//        String rating = "";
+//        if(intent.getStringExtra(CollegeProfAdapter.KEY_RATING) != "")
+//            rating = intent.getStringExtra(CollegeProfAdapter.KEY_RATING);
+//        else if(intent.getStringExtra(AllCardsAdapter.KEY_RATING) != "")
+//            rating = intent.getStringExtra(AllCardsAdapter.KEY_RATING);
+//        else if(intent.getStringExtra(RecommendedAdapter.KEY_RATING) != "")
+//            rating = intent.getStringExtra(RecommendedAdapter.KEY_RATING);
+//
+//        this.rbRating.setRating(Float.parseFloat(rating));
+
 
 //        int profimg = 0;
 //        if(intent.getIntExtra(CollegeProfAdapter.KEY_IMG, 0) != profimg)

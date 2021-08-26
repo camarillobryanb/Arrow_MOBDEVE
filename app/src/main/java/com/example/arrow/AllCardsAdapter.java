@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
     public static final String KEY_NAME = "KEY_NAME";
     public static final String KEY_IMG = "KEY_IMG";
     public static final String KEY_DESC = "KEY_DESC";
+    public static final String KEY_RATING = "KEY_RATING";
 
     public AllCardsAdapter(ArrayList<RecommendedHelperClass> cardProfs) {
         this.cardProfs = cardProfs;
@@ -29,6 +31,8 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
         ImageView image;
         TextView name, desc;
         LinearLayout ll_card;
+        RatingBar rbRating;
+
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -37,6 +41,7 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
             name = itemView.findViewById(R.id.featured_name);
             desc = itemView.findViewById(R.id.featured_desc);
             ll_card = itemView.findViewById(R.id.ll_allcard);
+            rbRating = itemView.findViewById(R.id.ratingBar);
 
         }
     }
@@ -57,6 +62,7 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
         holder.image.setImageResource(recommendedHelperClass.getImage());
         holder.name.setText(recommendedHelperClass.getName());
         holder.desc.setText(recommendedHelperClass.getDescription());
+        holder.rbRating.setRating(recommendedHelperClass.getRating());
         holder.ll_card.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -65,6 +71,7 @@ public class AllCardsAdapter extends RecyclerView.Adapter<AllCardsAdapter.Featur
                 intent.putExtra(KEY_NAME, cardProfs.get(position).getName());
                 intent.putExtra(KEY_IMG, cardProfs.get(position).getImage());
                 intent.putExtra(KEY_DESC, cardProfs.get(position).getDescription());
+                intent.putExtra(KEY_RATING, cardProfs.get(position).getRating());
                 v.getContext().startActivity(intent);
             }
         });

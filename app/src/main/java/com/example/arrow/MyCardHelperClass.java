@@ -3,7 +3,8 @@ package com.example.arrow;
 public class MyCardHelperClass {
 
     String name, description;
-    int image, rating;
+    int image;
+    float rating;
 
     public MyCardHelperClass(String name, String description, int image) {
         this.name = name;
@@ -11,7 +12,7 @@ public class MyCardHelperClass {
         this.image = image;
     }
 
-    public MyCardHelperClass(String name, String description, int image, int rating) {
+    public MyCardHelperClass(String name, String description, int image, float rating) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -42,11 +43,11 @@ public class MyCardHelperClass {
         this.image = image;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }

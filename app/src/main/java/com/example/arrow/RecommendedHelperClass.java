@@ -5,6 +5,7 @@ import android.widget.LinearLayout;
 
 public class RecommendedHelperClass {
     int image;
+    float rating;
     String name,description;
 
     public RecommendedHelperClass(int image, String name, String description) {
@@ -12,6 +13,22 @@ public class RecommendedHelperClass {
         this.name = name;
         this.description = description;
 
+    }
+
+    public RecommendedHelperClass(int image, String name, String description, float rating) {
+        this.image = image;
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public int getImage() {

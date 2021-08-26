@@ -23,6 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     ImageView iv_home;
     TextView tvLogout;
+    TextView tvFeatProf;
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -43,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         displayMyFeaturedProfessors();
         displayMyCurrentProfessors();
+
+        this.viewAddFeaturedPage();
         this.viewHome();
 
         tvLogout.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +58,17 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void viewAddFeaturedPage() {
+        this.tvFeatProf = findViewById(R.id.edit_feat_profs);
+        this.tvFeatProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this, AddFeaturedProfActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void initFirebase() {

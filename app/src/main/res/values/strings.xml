@@ -48,4 +48,6 @@
         <item>More Exams</item>
         <item>Pure Exams</item>
     </string-array>
+
+    <string name="addButton">Add to Featured</string>
 </resources>

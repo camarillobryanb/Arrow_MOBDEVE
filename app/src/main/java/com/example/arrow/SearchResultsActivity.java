@@ -97,7 +97,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
 
-        adapter = new AllCardsAdapter(resultItem);
+        adapter = new AddFeaturedProfAdapter(resultItem);
         searchResultsRecycler.setAdapter(adapter);
     }
 }

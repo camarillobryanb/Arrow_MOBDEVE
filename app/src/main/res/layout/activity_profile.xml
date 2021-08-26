@@ -57,6 +57,7 @@
             android:id="@+id/card_profImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
@@ -146,7 +147,7 @@
 
 
 
-    <RelativeLayout
+        <RelativeLayout
         android:id="@+id/rl_feat"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -182,6 +183,38 @@
             android:id="@+id/rl_current"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_rated"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <TextView
+
+                android:id="@+id/my_rated_profs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="My Rated Professors"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="22sp"
+                android:layout_marginTop="10dp"
+                />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myRated_Recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_rated_profs"
+
+                android:layout_marginTop="0dp" />
+
+        </RelativeLayout>
 
 
 

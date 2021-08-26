@@ -206,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="CURRENT PROFESSORS"
+                        android:text="All Professors"
                         android:textAllCaps="true"
                         android:textColor="@color/green"
                         android:textSize="20sp" />

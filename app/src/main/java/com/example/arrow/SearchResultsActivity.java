@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +19,13 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     RecyclerView searchResultsRecycler;
     TextView tvSubmitRequest;
+    ImageView iv_home;
+    ImageView iv_profile;
 
     RecyclerView.Adapter adapter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,32 @@ public class SearchResultsActivity extends AppCompatActivity {
         displaySearchResults();
         submitRequest();
 
+        this.viewHome();
+        this.viewProfile();
 
+
+    }
+
+    private void viewHome() {
+        this.iv_home= findViewById(R.id.iv_home);
+        this.iv_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SearchResultsActivity.this, userDashboard.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void viewProfile() {
+        this.iv_profile= findViewById(R.id.iv_profile);
+        this.iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SearchResultsActivity.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void submitRequest() {

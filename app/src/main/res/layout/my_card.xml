@@ -26,7 +26,6 @@
             android:background="@color/white"
             android:src="@drawable/delete_icon" />
 
-
         <ImageView
             android:id="@+id/featured_image"
             android:layout_width="match_parent"
@@ -48,15 +47,19 @@
             android:id="@+id/rb_rating"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
+            android:layout_marginTop="2dp"
             android:layout_height="wrap_content"
             android:rating="3.5" />
 
         <TextView
             android:id="@+id/featured_desc"
+            android:layout_below="@id/ratingBar"
+            android:layout_marginTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
             android:text="Computer Science Professor" />
+
 
 
     </LinearLayout>

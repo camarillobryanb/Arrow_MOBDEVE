@@ -31,6 +31,9 @@
         <activity android:name=".SearchResultsActivity"/>
         <activity android:name=".SubmitRequestActivity"/>
         <activity android:name=".AddFeaturedProfActivity"/>
+        <activity android:name=".EditProfile"/>
+        <activity android:name=".RateProfessor"/>
+
 
         <meta-data
             android:name="preloaded_fonts"

@@ -34,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tvFeatProf;
     TextView tvFname;
     TextView tvLname;
+    TextView editProfileButton;
 
     // Counts
     private int featuredCount = 0;
@@ -69,8 +70,10 @@ public class ProfileActivity extends AppCompatActivity {
         displayMyFeaturedProfessors();
         // displayMyCurrentProfessors();
 
-        this.viewAddFeaturedPage();
+        //this.viewAddFeaturedPage();
         this.viewHome();
+        this.viewEditProf();
+
 
         tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +82,17 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
+            }
+        });
+    }
+
+    private void viewEditProf() {
+        this.editProfileButton= findViewById(R.id.editprofile_button);
+        this.editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivity.this, EditProfile.class);
+                startActivity(i);
             }
         });
     }
@@ -99,16 +113,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void viewAddFeaturedPage() {
-        this.tvFeatProf = findViewById(R.id.edit_feat_profs);
-        this.tvFeatProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, AddFeaturedProfActivity.class);
-                startActivity(i);
-            }
-        });
-    }
 
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();

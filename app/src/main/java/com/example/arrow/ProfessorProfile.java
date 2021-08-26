@@ -61,23 +61,23 @@ public class ProfessorProfile extends AppCompatActivity {
 
         this.name.setText(profname);
 
-//        String rating = "";
-//        if(intent.getStringExtra(CollegeProfAdapter.KEY_RATING) != "")
-//            rating = intent.getStringExtra(CollegeProfAdapter.KEY_RATING);
-//        else if(intent.getStringExtra(AllCardsAdapter.KEY_RATING) != "")
-//            rating = intent.getStringExtra(AllCardsAdapter.KEY_RATING);
-//        else if(intent.getStringExtra(RecommendedAdapter.KEY_RATING) != "")
-//            rating = intent.getStringExtra(RecommendedAdapter.KEY_RATING);
-//
-//        this.rbRating.setRating(Float.parseFloat(rating));
+        float rating = -1;
+        if(intent.getFloatExtra(CollegeProfAdapter.KEY_RATING, 0) != -1)
+            rating = intent.getFloatExtra(CollegeProfAdapter.KEY_RATING, 0);
+        else if(intent.getFloatExtra(AllCardsAdapter.KEY_RATING, 0) != -1)
+            rating = intent.getFloatExtra(AllCardsAdapter.KEY_RATING, 0);
+        else if(intent.getFloatExtra(RecommendedAdapter.KEY_RATING, 0) != -1)
+            rating = intent.getFloatExtra(RecommendedAdapter.KEY_RATING, 0);
+
+        this.rbRating.setRating(rating);
 
 
-//        int profimg = 0;
-//        if(intent.getIntExtra(CollegeProfAdapter.KEY_IMG, 0) != profimg)
+//        int profimg = -1;
+//        if(intent.getIntExtra(CollegeProfAdapter.KEY_IMG, 0) != -1)
 //            profimg = intent.getIntExtra(CollegeProfAdapter.KEY_IMG, 0);
-//        else if(intent.getIntExtra(AllCardsAdapter.KEY_IMG, 0) != profimg)
+//        else if(intent.getIntExtra(AllCardsAdapter.KEY_IMG, 0) != -1)
 //            profimg = intent.getIntExtra(AllCardsAdapter.KEY_IMG, 0);
-//        else if(intent.getIntExtra(RecommendedAdapter.KEY_IMG, 0) != profimg)
+//        else if(intent.getIntExtra(RecommendedAdapter.KEY_IMG, 0) != -1)
 //            profimg = intent.getIntExtra(RecommendedAdapter.KEY_IMG, 0);
 //
 //        this.img.setImageResource(profimg);

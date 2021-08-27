@@ -175,9 +175,7 @@ public class ProfessorProfile extends AppCompatActivity {
                     if (task.isSuccessful()){
                         DataSnapshot snapshot = task.getResult();
                         Log.d("NAME", ""+searchlName);
-
                         Log.d("DATABASE - LastNames", ""+ String.valueOf(snapshot.child("lName").getValue()));
-
                         Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)));
 
                         if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {

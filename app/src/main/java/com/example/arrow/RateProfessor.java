@@ -49,6 +49,7 @@ public class RateProfessor extends AppCompatActivity {
 
     String fname;
     String lname;
+    String college;
 
     String profUID;
     String profname;
@@ -116,7 +117,7 @@ public class RateProfessor extends AppCompatActivity {
 
                 String UID = mAuth.getUid();
 
-                Review review = new Review(fname, lname, sync, attendance, grading, rating, comment, UID);
+                Review review = new Review(fname, lname, sync, attendance, grading, rating, comment, UID, college);
 
                 database.getReference().child("professors").child(profUID).child("reviews").child(""+reviewCount)
                         .setValue(review).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -213,6 +214,7 @@ public class RateProfessor extends AppCompatActivity {
                             DataSnapshot snapshot = task.getResult();
                             fname = String.valueOf(snapshot.child("fName").getValue());
                             lname = String.valueOf(snapshot.child("lName").getValue());
+                            college = String.valueOf(snapshot.child("college").getValue());
                         }
                     }
                 });

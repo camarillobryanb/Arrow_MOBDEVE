@@ -10,8 +10,9 @@ public class Review {
     private float overall;
     private String comment;
     private String UID;
+    private String college;
 
-    public Review(String fname, String lname, int sync, int attendance, int grading, float overall, String comment, String UID) {
+    public Review(String fname, String lname, int sync, int attendance, int grading, float overall, String comment, String UID, String college) {
         this.fname = fname;
         this.lname = lname;
         this.sync = sync;
@@ -20,6 +21,7 @@ public class Review {
         this.overall = overall;
         this.comment = comment;
         this.UID = UID;
+        this.college = college;
     }
 
     public String getFname() {
@@ -51,6 +53,10 @@ public class Review {
     }
 
     public String getUID() {
+        return UID;
+    }
+
+    public String getCollege() {
         return UID;
     }
 }

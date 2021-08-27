@@ -27,11 +27,11 @@ import java.util.ArrayList;
 public class ProfileActivity extends AppCompatActivity {
 
     RecyclerView rvFeaturedProfs;
-    RecyclerView rvCurrentProfs;
+    RecyclerView rvRatedProfs;
     RecyclerView.Adapter adapter;
     ImageView iv_home;
     TextView tvLogout;
-    TextView tvFeatProf;
+
     TextView tvFname;
     TextView tvLname;
     TextView editProfileButton;
@@ -39,8 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     // Counts
     private int featuredCount = 0;
     private ArrayList<String> allFeatured = new ArrayList<String>();
-    private int currentCount = 0;
-    private ArrayList<String> allCurrent = new ArrayList<String>();
+    private int ratedCount = 0;
+    private ArrayList<String> allRated = new ArrayList<String>();
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     // Views
     ArrayList<MyCardHelperClass> dataProfs = new ArrayList<>();
-    ArrayList<MyCardHelperClass> dataProfsCurr = new ArrayList<>();
+    ArrayList<MyCardHelperClass> dataRated = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +64,12 @@ public class ProfileActivity extends AppCompatActivity {
         changeHeading();
 
         rvFeaturedProfs = findViewById(R.id.myFeat_Recycler);
-        rvCurrentProfs = findViewById(R.id.myRated_Recycler);
+        rvRatedProfs = findViewById(R.id.myRated_Recycler);
 
         tvLogout = findViewById(R.id.logout_name);
 
         displayMyFeaturedProfessors();
-        displayMyCurrentProfessors();
+        displayMyRatedProfessors();
 
         //this.viewAddFeaturedPage();
         this.viewHome();
@@ -204,18 +204,76 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void displayMyCurrentProfessors() {
-        rvCurrentProfs.setHasFixedSize(true);
-        rvCurrentProfs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+    private void displayMyRatedProfessors() {
+        getRatedCount();
+    }
 
-        ArrayList<MyCardHelperClass> dataProfs = new ArrayList<>();
+    private void getRatedCount() {
+        database.getReference().child("users").child(mAuth.getUid()).child("rated")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        ratedCount = (int) snapshot.getChildrenCount();
+                        getRated();
+                    }
 
-        dataProfs.add(new MyCardHelperClass("Mrs. Santos", "Team Sports Professor" , R.drawable.prof_sample));
-        dataProfs.add(new MyCardHelperClass("Mrs. Cruz", "IT Professor", R.drawable.prof_sample));
-        dataProfs.add(new MyCardHelperClass("Mr. Perez", "History Professor", R.drawable.prof_sample));
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
+    }
 
-        adapter = new MyProfsAdapter(dataProfs);
-        rvCurrentProfs.setAdapter(adapter);
+    private void getRated() {
+        Log.d("FIREBASE", ""+ratedCount);
+        DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid()).child("rated");
+
+        for (int i = 0; i < ratedCount; i++){
+            tempdb.child(Integer.toString(i))
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String value = snapshot.getValue().toString();
+                            allRated.add(value);
+                            Log.d("ALL RATED", ""+allRated);
+                            if (allRated.size() == ratedCount){
+                                displayRated();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+        }
+    }
+
+    private void displayRated() {
+        rvRatedProfs.setHasFixedSize(true);
+        rvRatedProfs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        for (int i = 0; i < ratedCount; i++){
+            database.getReference().child("professors").child(allRated.get(i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+
+                        String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                        String lname = String.valueOf(snapshot.child("lName").getValue());
+                        String college = String.valueOf(snapshot.child("college").getValue());
+                        float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+
+                        dataRated.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample, rating));
+
+                        adapter = new MyProfsAdapter(dataRated);
+                        rvRatedProfs.setAdapter(adapter);
+                    }
+                }
+            });
+        }
     }
 }

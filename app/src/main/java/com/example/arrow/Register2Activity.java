@@ -134,10 +134,7 @@ public class Register2Activity extends AppCompatActivity implements AdapterView.
         int nAttendance = syncToAttendance(spAttendance.getSelectedItem().toString());
         int nGrading = syncToGrading(spGrading.getSelectedItem().toString());
 
-        int[] featured = {};
-        int[] current = {};
-
-        User user = new User(etEmail, etPassword, etFName.getText().toString().trim(), etLName.getText().toString().trim(), college, nSync, nAttendance, nGrading, featured, current);
+        User user = new User(etEmail, etPassword, etFName.getText().toString().trim(), etLName.getText().toString().trim(), college, nSync, nAttendance, nGrading);
 
         database.getReference("users")
                 .child(UID)

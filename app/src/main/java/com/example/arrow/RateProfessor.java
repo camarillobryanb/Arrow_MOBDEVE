@@ -115,6 +115,9 @@ public class RateProfessor extends AppCompatActivity {
         });
     }
 
+
+
+
     private void getName(){
         database.getReference("users").child(mAuth.getUid()).get()
                 .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {

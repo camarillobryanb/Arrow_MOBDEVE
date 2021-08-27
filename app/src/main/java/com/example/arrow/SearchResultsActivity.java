@@ -151,7 +151,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                         Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ));
 
                         if(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ) {
-
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());

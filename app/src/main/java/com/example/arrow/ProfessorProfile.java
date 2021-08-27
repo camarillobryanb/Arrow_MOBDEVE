@@ -103,7 +103,7 @@ public class ProfessorProfile extends AppCompatActivity {
 //        getCollegeProfessorsCount(profname);
 //        getCommentCount("0000001");
 
-        getCollegeProfessorsCount("Ms. Lim");
+        getCollegeProfessorsCount(profname);
 
         this.viewHome();
         this.viewProfile();

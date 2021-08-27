@@ -3,6 +3,7 @@ package com.example.arrow;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -21,7 +22,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RateProfessor extends AppCompatActivity {
 
@@ -47,6 +50,12 @@ public class RateProfessor extends AppCompatActivity {
     String fname;
     String lname;
 
+    String profUID;
+    String profname;
+
+    int reviewCount;
+    int profsCount;
+
     // Firebase
     FirebaseAuth mAuth;
     FirebaseDatabase database;
@@ -71,6 +80,11 @@ public class RateProfessor extends AppCompatActivity {
 
     private void initComponents() {
         getName();
+
+        getProfsCount();
+
+        Intent i = getIntent();
+        profname = i.getStringExtra("NAME");
 
         this.rgSync = findViewById(R.id.rg_sync);
         this.rgAttendance = findViewById(R.id.rg_attendance);
@@ -102,7 +116,7 @@ public class RateProfessor extends AppCompatActivity {
 
                 Review review = new Review(fname, lname, sync, attendance, grading, rating, comment, UID);
 
-                database.getReference().child("professors").child("0000001").child("reviews").child("0")
+                database.getReference().child("professors").child(profUID).child("reviews").child(""+reviewCount)
                         .setValue(review).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -113,6 +127,59 @@ public class RateProfessor extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void getReviewCount(){
+        database.getReference().child("professors").child(profUID).child("reviews")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        reviewCount = (int) snapshot.getChildrenCount();
+                        Log.d("REVIEW COUNT", ""+reviewCount);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void getProfUID(){
+        for (int i = 1; i <= profsCount; i++){
+            database.getReference().child("professors").child(String.format("%07d", i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+                        if (String.valueOf(snapshot.child("lName").getValue()).equals(profname)) {
+                            profUID = snapshot.getKey();
+                            Log.d("PROF UID", snapshot.getKey());
+                            getReviewCount();
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    private void getProfsCount(){
+        database.getReference().child("professors")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        profsCount = (int) snapshot.getChildrenCount();
+                        getProfUID();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void getName(){

@@ -50,7 +50,7 @@ public class ProfessorProfile extends AppCompatActivity {
     int commentCount = 0;
     int collegeProfessorsCount = 0;
     String profId;
-    int i = 0;
+    int i;
 
     RecyclerView.Adapter adapter;
 
@@ -100,13 +100,16 @@ public class ProfessorProfile extends AppCompatActivity {
 //        this.img.setImageResource(profimg);
 
         initFirebase();
-        getCollegeProfessorsCount(profname);
-//        getDetailsfromID("0000001");
-//        getDetailsfromID("0000001");
+//        getCollegeProfessorsCount(profname);
+//        getCommentCount("0000001");
+
+        getUID("Ms. Lim");
 
         this.viewHome();
         this.viewProfile();
         this.rateProf();
+
+
 
 
     }
@@ -147,24 +150,24 @@ public class ProfessorProfile extends AppCompatActivity {
         this.mAuth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
-
-    private void getCollegeProfessorsCount(String profname) {
-        database.getReference().child("professors")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
-                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
-                        getUID(profname);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
-
+//
+//    private void getCollegeProfessorsCount(String profname) {
+//        database.getReference().child("professors")
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+//                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
+//                        getUID(profname);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//    }
+//
     private void getUID(String name){
         String x = name;
         String searchlName = x.split(" ")[1];
@@ -187,8 +190,8 @@ public class ProfessorProfile extends AppCompatActivity {
 
                         if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {
                             Log.d("UID", ""+(String.format("%07d", i)));
-                            getDetailsfromID(String.format("%07d", i));
-                            
+                            getCommentCount(String.format("%07d", i));
+
                         }
 
 
@@ -201,31 +204,34 @@ public class ProfessorProfile extends AppCompatActivity {
     }
 
 
-    private void getDetailsfromID (String ID){
-        database.getReference().child("professors").child(ID)
+    private String[] getDetailsfromID (String ID){
+
+        String[] id_details = new String[3];
+        database.getReference().child("users").child(ID)
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()){
                     DataSnapshot snapshot = task.getResult();
-                    String fName = String.valueOf(snapshot.child("fName").getValue());
-                    String lName = String.valueOf(snapshot.child("lName").getValue());
-                    String college = String.valueOf(snapshot.child("college").getValue());
 
-                    getCommentCount(ID, fName, lName, college);
+                    id_details[0] = String.valueOf(snapshot.child("fName").getValue());
+                    id_details[1] = String.valueOf(snapshot.child("lName").getValue());
+                    id_details[2] = String.valueOf(snapshot.child("college").getValue());
                 }
             }
         });
+
+        return id_details;
     }
 
-    private void getCommentCount(String ID, String fName, String lName, String college) {
+    private void getCommentCount(String ID) {
         database.getReference().child("professors").child(ID).child("reviews")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Log.d("FIREBASE", ""+snapshot.getChildrenCount());
                         commentCount = (int) snapshot.getChildrenCount();
-                        displayRated(ID, fName, lName, college);
+                        displayRated(ID);
                     }
 
                     @Override
@@ -235,7 +241,7 @@ public class ProfessorProfile extends AppCompatActivity {
                 });
     }
 
-    private void displayRated(String ID, String fName, String lName, String college) {
+    private void displayRated(String ID) {
         commentsRecycler.setHasFixedSize(true);
         commentsRecycler.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
 
@@ -247,16 +253,19 @@ public class ProfessorProfile extends AppCompatActivity {
                     if (task.isSuccessful()){
                         DataSnapshot snapshot = task.getResult();
 
-
+                        String fName = String.valueOf(snapshot.child("fName").getValue());
+                        String lName = String.valueOf(snapshot.child("lName").getValue());
+                        String college = String.valueOf(snapshot.child("college").getValue());
                         float rating = Float.parseFloat(String.valueOf(snapshot.child("overall").getValue()));
                         int learning = Integer.parseInt(String.valueOf(snapshot.child("sync").getValue()));
                         int grading = Integer.parseInt(String.valueOf(snapshot.child("grading").getValue()));
                         int attendance = Integer.parseInt(String.valueOf(snapshot.child("attendance").getValue()));
                         String review = String.valueOf(snapshot.child("comment").getValue());
 
+
 //                        commentItem.add(new CommentHelperClass(fName, lName, college, learning, attendance, grading, rating, review));
 
-                        commentItem.add(new CommentHelperClass(fName, lName, college, 2, 3, 3, 2, "review"));
+                        commentItem.add(new CommentHelperClass(fName, lName, college, learning, attendance, grading, rating, review));
 
                         adapter = new CommentCardAdapter(commentItem);
                         commentsRecycler.setAdapter(adapter);

@@ -19,19 +19,25 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     RecyclerView searchResultsRecycler;
     TextView tvSubmitRequest;
+    TextView tvSearchedInfo;
     ImageView iv_home;
     ImageView iv_profile;
 
+    // Search
+    String searchItem;
+
     RecyclerView.Adapter adapter;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.search_results);
+
+        Intent i = getIntent();
+        tvSearchedInfo = findViewById(R.id.searched_info);
+        searchItem = i.getStringExtra("SEARCH");
+        tvSearchedInfo.setText(searchItem);
 
         //Hooks
         searchResultsRecycler = findViewById(R.id.searchResults_Recycler);
@@ -41,8 +47,6 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         this.viewHome();
         this.viewProfile();
-
-
     }
 
     private void viewHome() {
@@ -94,8 +98,6 @@ public class SearchResultsActivity extends AppCompatActivity {
         resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Santos", "Team Sports Professor"));
         resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mr. Perez", "History Professor"));
         resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample, "Mrs. Cruz", "IT Professor"));
-
-
 
         adapter = new AddFeaturedProfAdapter(resultItem);
         searchResultsRecycler.setAdapter(adapter);

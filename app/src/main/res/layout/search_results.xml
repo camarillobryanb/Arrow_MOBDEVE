@@ -76,7 +76,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Juan Miguel"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,8 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import org.jetbrains.annotations.NotNull;
+import com.google.firebase.database.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -50,6 +50,8 @@ public class userDashboard extends AppCompatActivity {
     ImageView ivMyProfile;
     ImageView ivSearch;
     ImageView iv_home;
+
+    EditText etSearch;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -93,7 +95,6 @@ public class userDashboard extends AppCompatActivity {
         this.searchResults();
     }
 
-
     private void viewMyProfile() {
         this.ivMyProfile = findViewById(R.id.iv_profile);
         this.ivMyProfile.setOnClickListener(new View.OnClickListener() {
@@ -105,15 +106,14 @@ public class userDashboard extends AppCompatActivity {
         });
     }
 
-
-
-
     private void searchResults() {
+        this.etSearch = findViewById(R.id.searchtext);
         this.ivSearch = findViewById(R.id.iv_search);
         this.ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(userDashboard.this, SearchResultsActivity.class);
+                i.putExtra("SEARCH", etSearch.getText().toString().trim());
                 startActivity(i);
             }
         });
@@ -171,7 +171,6 @@ public class userDashboard extends AppCompatActivity {
         adapter = new RecommendedAdapter(recProfs);
         recommendedRecycler.setAdapter(adapter);
     }
-
 
     private void yourCollegeProfessors() {
         CollegeProfessorsRecycler.setHasFixedSize(true);
@@ -252,6 +251,7 @@ public class userDashboard extends AppCompatActivity {
         CollegeProfessorsRecycler.setHasFixedSize(true);
         CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        /*
         Query myMostViewedPostsQuery = databaseReference.child("professors")
                 .orderByChild("overallRating");
         myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
@@ -291,6 +291,10 @@ public class userDashboard extends AppCompatActivity {
             }
             // TODO: implement the ChildEventListener methods as documented above
             // ...
+
+
+
+
         });
 
 
@@ -307,12 +311,8 @@ public class userDashboard extends AppCompatActivity {
             });
 
 
+         */
     }
-
-
-
-
-
 
     private void CurrentProfessors() {
         CurrentProfessorsRecycler.setHasFixedSize(true);

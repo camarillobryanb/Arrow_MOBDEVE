@@ -55,6 +55,7 @@ public class RateProfessor extends AppCompatActivity {
 
     int reviewCount;
     int profsCount;
+    int ratedCount;
 
     // Firebase
     FirebaseAuth mAuth;
@@ -82,6 +83,7 @@ public class RateProfessor extends AppCompatActivity {
         getName();
 
         getProfsCount();
+        getRatedCount();
 
         Intent i = getIntent();
         profname = i.getStringExtra("NAME");
@@ -121,12 +123,32 @@ public class RateProfessor extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+                            addToRated();
                             successReview();
                         }
                     }
                 });
             }
         });
+    }
+
+    private void getRatedCount(){
+        database.getReference().child("users").child(mAuth.getUid()).child("rated")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ratedCount = (int) snapshot.getChildrenCount();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void addToRated(){
+        database.getReference().child("users").child(mAuth.getUid()).child("rated").child(""+ratedCount).setValue(profUID);
     }
 
     private void getReviewCount(){

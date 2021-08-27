@@ -3,6 +3,7 @@ package com.example.arrow;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -10,13 +11,21 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -34,6 +43,14 @@ public class ProfessorProfile extends AppCompatActivity {
     // Firebase
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
+
+    ArrayList<CommentHelperClass> commentItem = new ArrayList<>();
+    ArrayList<String> lNames = new ArrayList<>();
+
+    int commentCount = 0;
+    int collegeProfessorsCount = 0;
+    String profId;
+    int i;
 
     RecyclerView.Adapter adapter;
 
@@ -82,10 +99,10 @@ public class ProfessorProfile extends AppCompatActivity {
 //
 //        this.img.setImageResource(profimg);
 
-
-
-        commentsReview();
-
+        initFirebase();
+//        getCollegeProfessorsCount(profname);
+//        getDetailsfromID("0000001");
+        getDetailsfromID("0000001");
 
         this.viewHome();
         this.viewProfile();
@@ -124,6 +141,78 @@ public class ProfessorProfile extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    }
+
+
+    private void getDetailsfromID (String ID){
+        database.getReference().child("professors").child(ID)
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()){
+                    DataSnapshot snapshot = task.getResult();
+
+                    String fName = String.valueOf(snapshot.child("fName").getValue());
+                    String lName = String.valueOf(snapshot.child("lName").getValue());
+                    String college = String.valueOf(snapshot.child("college").getValue());
+
+                    getCommentCount(ID, fName, lName, college);
+                }
+            }
+        });
+    }
+
+    private void getCommentCount(String ID, String fName, String lName, String college) {
+        database.getReference().child("professors").child(ID).child("reviews")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        commentCount = (int) snapshot.getChildrenCount();
+                        displayRated(ID, fName, lName, college);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void displayRated(String ID, String fName, String lName, String college) {
+        commentsRecycler.setHasFixedSize(true);
+        commentsRecycler.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
+
+        for (i = 0; i < commentCount; i++){
+            database.getReference().child("professors").child(ID).child("reviews").child(Integer.toString(i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+
+
+                        float rating = Float.parseFloat(String.valueOf(snapshot.child("overall").getValue()));
+                        int learning = Integer.parseInt(String.valueOf(snapshot.child("sync").getValue()));
+                        int grading = Integer.parseInt(String.valueOf(snapshot.child("grading").getValue()));
+                        int attendance = Integer.parseInt(String.valueOf(snapshot.child("attendance").getValue()));
+                        String review = String.valueOf(snapshot.child("comment").getValue());
+
+//                        commentItem.add(new CommentHelperClass(fName, lName, college, learning, attendance, grading, rating, review));
+
+                        commentItem.add(new CommentHelperClass(fName, lName, college, 2, 3, 3, 2, "review"));
+
+                        adapter = new CommentCardAdapter(commentItem);
+                        commentsRecycler.setAdapter(adapter);
+                    }
+                }
+            });
+        }
     }
 
 

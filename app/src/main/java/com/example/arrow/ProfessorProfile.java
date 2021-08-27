@@ -246,8 +246,8 @@ public class ProfessorProfile extends AppCompatActivity {
                     if (task.isSuccessful()){
                         DataSnapshot snapshot = task.getResult();
 
-                        String fName = String.valueOf(snapshot.child("fName").getValue());
-                        String lName = String.valueOf(snapshot.child("lName").getValue());
+                        String fName = String.valueOf(snapshot.child("fname").getValue());
+                        String lName = String.valueOf(snapshot.child("lname").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
                         float rating = Float.parseFloat(String.valueOf(snapshot.child("overall").getValue()));
                         int learning = Integer.parseInt(String.valueOf(snapshot.child("sync").getValue()));

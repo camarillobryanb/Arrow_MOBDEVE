@@ -91,24 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-
-                            /*
-                            database.getReference("users")
-                                    .child(mAuth.getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        successfulRegistration();
-                                    } else {
-                                        failedRegistration();
-                                    }
-                                }
-                            });
-                             */
-
                             successfulRegistration();
-
                         } else {
                             failedRegistration();
                         }

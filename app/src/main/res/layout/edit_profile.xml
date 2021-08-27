@@ -137,7 +137,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans"
-            android:text="Jane"
+            android:hint="Jane"
             android:textSize="14dp" />
 
         <TextView
@@ -157,11 +157,11 @@
             android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/last_name"
-            android:layout_marginTop="5dp"
-            android:textSize="14dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans"
-            android:text="Dela Cruz" />
+            android:hint="Dela Cruz"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/College_Name"

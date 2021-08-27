@@ -103,7 +103,7 @@ public class ProfessorProfile extends AppCompatActivity {
 //        getCollegeProfessorsCount(profname);
 //        getCommentCount("0000001");
 
-        getUID("Ms. Lim");
+        getCollegeProfessorsCount("Ms. Lim");
 
         this.viewHome();
         this.viewProfile();
@@ -150,24 +150,24 @@ public class ProfessorProfile extends AppCompatActivity {
         this.mAuth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
-//
-//    private void getCollegeProfessorsCount(String profname) {
-//        database.getReference().child("professors")
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
-//                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
-//                        getUID(profname);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//    }
-//
+
+  private void getCollegeProfessorsCount(String profname) {
+       database.getReference().child("professors")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
+                        getUID(profname);
+                    }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                 }
+                });
+   }
+
     private void getUID(String name){
         String x = name;
         String searchlName = x.split(" ")[1];
@@ -192,7 +192,7 @@ public class ProfessorProfile extends AppCompatActivity {
 
                     }
 
-                }
+
             });
         }
 

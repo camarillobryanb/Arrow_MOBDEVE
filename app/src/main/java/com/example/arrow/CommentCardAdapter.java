@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
         TextView attendance;
         TextView grading;
         TextView review;
+        RatingBar rating;
 
 
         public FeaturedViewHolder(@NonNull View itemView) {
@@ -41,6 +43,7 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
             attendance = itemView.findViewById(R.id.attendance);
             grading = itemView.findViewById(R.id.grading);
             review = itemView.findViewById(R.id.review_comment);
+            rating = itemView.findViewById(R.id.overall_rating);
         }
     }
 
@@ -64,6 +67,7 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
         holder.attendance.setText(commentHelperClass.getAttendance());
         holder.grading.setText(commentHelperClass.getGrading());
         holder.review.setText(commentHelperClass.getReview());
+        holder.rating.setRating(commentHelperClass.getRating());
 
     }
 

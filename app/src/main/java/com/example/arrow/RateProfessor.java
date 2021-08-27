@@ -115,7 +115,7 @@ public class RateProfessor extends AppCompatActivity {
             return 2;
         } else if (text.equals("Moderate")){
             return 3;
-        } else if (text.equals("More Sync")){
+        } else if (text.equals("More")){
             return 4;
         } else {
             return 5;

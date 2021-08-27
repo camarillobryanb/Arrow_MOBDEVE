@@ -122,13 +122,20 @@
                         android:layout_marginLeft="5dp"
                         android:text="Moderate" />
 
+                    <RadioButton
+                        android:id="@+id/rb_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="More" />
+
 
                     <RadioButton
                         android:id="@+id/rb_pure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="Pure Sync" />
+                        android:text="Pure" />
                 </RadioGroup>
 
 

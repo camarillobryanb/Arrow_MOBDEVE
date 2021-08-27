@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,10 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -47,9 +53,14 @@ public class userDashboard extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
     ArrayList<RecommendedHelperClass> currProfs = new ArrayList<>();
+    ArrayList<RecommendedHelperClass> topRatedProfs = new ArrayList<>();
+
 
     int collegeProfessorsCount = 0;
+    int topRatedProfessorsCount = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +71,18 @@ public class userDashboard extends AppCompatActivity {
         //Hooks
         recommendedRecycler = findViewById(R.id.recommendedProfs_recycler);
         CollegeProfessorsRecycler = findViewById(R.id.college_profs_recycler);
+
+        // Get a reference to the Firebase Database
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         CurrentProfessorsRecycler = findViewById(R.id.current_profs_recycler);
 
         initFirebase();
 
         //Adapter per section
         recommendedProfessors();
-        yourCollegeProfessors();
+       // yourCollegeProfessors();
         getCollegeProfessorsCount();
+        getTopRatedProfessorsCount();
 
 
         //Onclick of View All buttons
@@ -188,6 +203,116 @@ public class userDashboard extends AppCompatActivity {
                     }
                 });
     }
+
+
+
+    private void getTopRatedProfessorsCount() {
+        database.getReference().child("professors").orderByChild("overallRating")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE TOP RATED", ""+snapshot.getChildrenCount());
+                        topRatedProfessorsCount = (int) snapshot.getChildrenCount();
+                        TopRatedProfessors();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+    }
+
+    private void TopRatedProfessors() {
+        CollegeProfessorsRecycler.setHasFixedSize(true);
+        CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            for (int i = 1; i <= topRatedProfessorsCount; i++){
+
+            database.getReference().child("professors").child(String.format("%07d", i)).orderByChild("overallRating")
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+                        Log.d("FIREBASE TOP RATED", ""+ snapshot.child("lName").getValue());
+                        String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                        String lname = String.valueOf(snapshot.child("lName").getValue());
+                        String college = String.valueOf(snapshot.child("college").getValue());
+                        float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                        topRatedProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                        adapter = new CollegeProfAdapter(topRatedProfs);
+                        CollegeProfessorsRecycler.setAdapter(adapter);
+                    }
+                }
+            });
+        }
+    }
+
+
+    private void tryTopRatedProfessors(){
+        CollegeProfessorsRecycler.setHasFixedSize(true);
+        CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        Query myMostViewedPostsQuery = databaseReference.child("professors")
+                .orderByChild("overallRating");
+        myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                Log.d("onchildAdded", ""+ snapshot.child("lName").getValue());
+                //String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                //String lname = String.valueOf(snapshot.child("lName").getValue());
+                //String college = String.valueOf(snapshot.child("college").getValue());
+                //float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                //topRatedProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                //adapter = new CollegeProfAdapter(topRatedProfs);
+                //CollegeProfessorsRecycler.setAdapter(adapter);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                Log.d("onchildchanged","something");
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+                Log.d("onchildremoved","something");
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                Log.d("onchildmoved","something");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                Log.d("onchildcancelled","something");
+
+            }
+            // TODO: implement the ChildEventListener methods as documented above
+            // ...
+        });
+
+
+
+            database.getReference().child("professors").orderByChild("overallRating")
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+
+                    }
+                }
+            });
+
+
+    }
+
+
+
+
+
 
     private void CurrentProfessors() {
         CurrentProfessorsRecycler.setHasFixedSize(true);

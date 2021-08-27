@@ -153,11 +153,11 @@ public class Register2Activity extends AppCompatActivity implements AdapterView.
     private int syncToInt(String sync){
         if (sync.equals("None")){
             return 1;
-        } else if (sync.equals("Few Sessions")){
+        } else if (sync.equals("Few")){
             return 2;
-        } else if (sync.equals("Balanced")){
+        } else if (sync.equals("Moderate")){
             return 3;
-        } else if (sync.equals("More Synchronous")){
+        } else if (sync.equals("More")){
             return 4;
         } else {
             return 5;

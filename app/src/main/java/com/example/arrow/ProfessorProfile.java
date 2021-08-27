@@ -100,9 +100,9 @@ public class ProfessorProfile extends AppCompatActivity {
 //        this.img.setImageResource(profimg);
 
         initFirebase();
-//        getCollegeProfessorsCount(profname);
+        getCollegeProfessorsCount(profname);
 //        getDetailsfromID("0000001");
-        getDetailsfromID("0000001");
+//        getDetailsfromID("0000001");
 
         this.viewHome();
         this.viewProfile();
@@ -146,6 +146,46 @@ public class ProfessorProfile extends AppCompatActivity {
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    }
+
+    private void getCollegeProfessorsCount(String profname) {
+        database.getReference().child("professors")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
+                        getUID(profname);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void getUID(String name){
+        String[] lname = name.split(" ");
+
+        for (i = 1; i <= collegeProfessorsCount; i++){
+            database.getReference().child("professors").child(String.format("%07d", i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+
+
+                        String value = String.valueOf(snapshot.child("lname").getValue());
+
+                        if(value.equals(lname[1]))
+                            getDetailsfromID(String.format("%07d", i));
+
+                    }
+                }
+            });
+        }
     }
 
 

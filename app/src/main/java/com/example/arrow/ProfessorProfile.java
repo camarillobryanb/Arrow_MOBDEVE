@@ -50,7 +50,7 @@ public class ProfessorProfile extends AppCompatActivity {
     int commentCount = 0;
     int collegeProfessorsCount = 0;
     String profId;
-    int i;
+    int i = 0;
 
     RecyclerView.Adapter adapter;
 
@@ -166,7 +166,6 @@ public class ProfessorProfile extends AppCompatActivity {
     }
 
     private void getUID(String name){
-        String[] lname = name.split(" ");
 
         for (i = 1; i <= collegeProfessorsCount; i++){
             database.getReference().child("professors").child(String.format("%07d", i))
@@ -177,15 +176,13 @@ public class ProfessorProfile extends AppCompatActivity {
                         DataSnapshot snapshot = task.getResult();
 
 
-                        String value = String.valueOf(snapshot.child("lname").getValue());
-
-                        if(value.equals(lname[1]))
-                            getDetailsfromID(String.format("%07d", i));
-
+                        String value = String.valueOf(snapshot.child("lName").getValue());
+                        getDetailsfromID(String.format("%07d", i));
                     }
                 }
             });
         }
+
     }
 
 

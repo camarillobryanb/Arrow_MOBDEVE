@@ -144,7 +144,6 @@ public class ProfileActivity extends AppCompatActivity {
     private void getFeatured() {
         Log.d("FIREBASE", ""+featuredCount);
         DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid()).child("featured");
-
         for (int i = 0; i < featuredCount; i++){
             tempdb.child(Integer.toString(i))
                     .addListenerForSingleValueEvent(new ValueEventListener() {

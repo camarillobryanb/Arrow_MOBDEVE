@@ -39,6 +39,8 @@ public class userDashboard extends AppCompatActivity {
     RecyclerView CurrentProfessorsRecycler;
 
     RecyclerView.Adapter adapter;
+    private ArrayList<String> allRecs = new ArrayList<String>();
+
 
     TextView tv_viewAllCollegeProfs;
     TextView tv_viewAllCurrentProfs;
@@ -57,10 +59,18 @@ public class userDashboard extends AppCompatActivity {
     private DatabaseReference databaseReference;
     ArrayList<RecommendedHelperClass> currProfs = new ArrayList<>();
     ArrayList<RecommendedHelperClass> topRatedProfs = new ArrayList<>();
+    ArrayList<RecommendedHelperClass> recProfs = new ArrayList<>();
+
 
 
     int collegeProfessorsCount = 0;
     int topRatedProfessorsCount = 0;
+    int recommendedProfsCount = 0;
+
+    int userGrading=0;
+    int userAttendance=0;
+    int userSync = 0;
+
 
 
     @Override
@@ -80,10 +90,12 @@ public class userDashboard extends AppCompatActivity {
         initFirebase();
 
         //Adapter per section
-        recommendedProfessors();
+        //recommendedProfessors();
        // yourCollegeProfessors();
         getCollegeProfessorsCount();
         getTopRatedProfessorsCount();
+
+        getRecCount();
 
 
         //Onclick of View All buttons
@@ -230,6 +242,7 @@ public class userDashboard extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful()){
+
                         DataSnapshot snapshot = task.getResult();
                         Log.d("FIREBASE TOP RATED", ""+ snapshot.child("lName").getValue());
                         String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
@@ -246,68 +259,98 @@ public class userDashboard extends AppCompatActivity {
         }
     }
 
+    private void getRecCount() {
+
+        database.getReference().child("users").child(mAuth.getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DataSnapshot snapshot = task.getResult();
+                    userAttendance= Integer.parseInt(String.valueOf(snapshot.child("attendance").getValue()));
+                    userSync = Integer.parseInt(String.valueOf(snapshot.child("sync").getValue()));
+                    userGrading=Integer.parseInt(String.valueOf(snapshot.child("grading").getValue()));
+                    Log.d("GRADING", ""+userGrading);
+
+                    tryRec();
+
+                }
+
+            }
+        });
 
 
-//    private void tryTopRatedProfessors(){
-//        CollegeProfessorsRecycler.setHasFixedSize(true);
-//        CollegeProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//
-//        Query myMostViewedPostsQuery = databaseReference.child("professors")
-//                .orderByChild("overallRating");
-//        myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//                Log.d("onchildAdded", ""+ snapshot.child("lName").getValue());
-//                //String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
-//                //String lname = String.valueOf(snapshot.child("lName").getValue());
-//                //String college = String.valueOf(snapshot.child("college").getValue());
-//                //float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
-//                //topRatedProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
-//                //adapter = new CollegeProfAdapter(topRatedProfs);
-//                //CollegeProfessorsRecycler.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//                Log.d("onchildchanged","something");
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-//                Log.d("onchildremoved","something");
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//                Log.d("onchildmoved","something");
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//                Log.d("onchildcancelled","something");
-//
-//            }
-//            // TODO: implement the ChildEventListener methods as documented above
-//            // ...
-//        });
-//
-//
-//
-//            database.getReference().child("professors").orderByChild("overallRating")
-//                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                    if (task.isSuccessful()){
-//                        DataSnapshot snapshot = task.getResult();
-//
-//                    }
-//                }
-//            });
-//
-//
-//    }
+
+
+
+    }
+
+    private void tryRec(){
+        recommendedRecycler.setHasFixedSize(true);
+        recommendedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+
+
+
+
+        //CurrentProfessorsRecycler.setHasFixedSize(true);
+        //CurrentProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        for (int i = 1; i <= collegeProfessorsCount; i++){
+            database.getReference().child("professors").child(String.format("%07d", i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+
+
+                        if((Integer.parseInt(String.valueOf(snapshot.child("grading").getValue())) == userGrading)) {
+
+                            String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                            String lname = String.valueOf(snapshot.child("lName").getValue());
+                            String college = String.valueOf(snapshot.child("college").getValue());
+                            float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+
+                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            adapter = new RecommendedAdapter(recProfs);
+                            recommendedRecycler.setAdapter(adapter);
+
+                         } else if ((Integer.parseInt(String.valueOf(snapshot.child("attendance").getValue())) == userAttendance)) {
+                            String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                            String lname = String.valueOf(snapshot.child("lName").getValue());
+                            String college = String.valueOf(snapshot.child("college").getValue());
+                            float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+
+                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            adapter = new RecommendedAdapter(recProfs);
+                            recommendedRecycler.setAdapter(adapter);
+                         }
+
+                         else if ((Integer.parseInt(String.valueOf(snapshot.child("sync").getValue())) == userSync)) {
+                            String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                            String lname = String.valueOf(snapshot.child("lName").getValue());
+                            String college = String.valueOf(snapshot.child("college").getValue());
+                            float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+
+                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            adapter = new RecommendedAdapter(recProfs);
+                            recommendedRecycler.setAdapter(adapter);
+                         }
+
+                    }
+                }
+            });
+        }
+
+
+
+
+
+    }
 
     private void CurrentProfessors() {
         CurrentProfessorsRecycler.setHasFixedSize(true);

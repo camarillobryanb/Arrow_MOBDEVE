@@ -157,7 +157,6 @@ public class ProfessorProfile extends AppCompatActivity {
                         collegeProfessorsCount = (int) snapshot.getChildrenCount();
                         getUID(profname);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -168,29 +167,24 @@ public class ProfessorProfile extends AppCompatActivity {
     private void getUID(String name){
         String x = name;
         String searchlName = x.split(" ")[1];
-
         for (i = 1; i <= collegeProfessorsCount; i++){
             database.getReference().child("professors").child(String.format("%07d", i))
                     .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful()){
-
                         DataSnapshot snapshot = task.getResult();
-
                         Log.d("NAME", ""+searchlName);
 
                         Log.d("DATABASE - LastNames", ""+ String.valueOf(snapshot.child("lName").getValue()));
-
 
                         Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)));
 
                         if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {
                             Log.d("UID", ""+(String.format("%07d", i)));
                             getDetailsfromID(String.format("%07d", i));
-                            
-                        }
 
+                        }
 
                     }
 
@@ -211,7 +205,6 @@ public class ProfessorProfile extends AppCompatActivity {
                     String fName = String.valueOf(snapshot.child("fName").getValue());
                     String lName = String.valueOf(snapshot.child("lName").getValue());
                     String college = String.valueOf(snapshot.child("college").getValue());
-
                     getCommentCount(ID, fName, lName, college);
                 }
             }

@@ -271,7 +271,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/open_sans"
-                    android:text="Describe Your Experience"
+                    android:hint="Describe Your Experience"
                     android:textSize="12dp" />
 
 
@@ -285,6 +285,7 @@
                     android:layout_below="@id/et_reviewdesc"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@color/green"
                     android:text="Submit Review"
                     android:textColor="#FFFFFF"

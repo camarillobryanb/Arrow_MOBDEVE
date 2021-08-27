@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RateProfessor extends AppCompatActivity {
@@ -42,6 +43,9 @@ public class RateProfessor extends AppCompatActivity {
     EditText etReview;
 
     Button btnSubmit;
+
+    String fname;
+    String lname;
 
     // Firebase
     FirebaseAuth mAuth;
@@ -66,6 +70,8 @@ public class RateProfessor extends AppCompatActivity {
     }
 
     private void initComponents() {
+        getName();
+
         this.rgSync = findViewById(R.id.rg_sync);
         this.rgAttendance = findViewById(R.id.rg_attendance);
         this.rgGrading = findViewById(R.id.rg_gradingcriteria);
@@ -76,7 +82,6 @@ public class RateProfessor extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
                 int selectedSync = rgSync.getCheckedRadioButtonId();
                 rbSync = (RadioButton) findViewById(selectedSync);
                 int sync = convertSyncToInt(rbSync.getText().toString());
@@ -93,7 +98,9 @@ public class RateProfessor extends AppCompatActivity {
 
                 String comment = etReview.getText().toString().trim();
 
-                Review review = new Review(sync, attendance, grading, rating, comment);
+                String UID = mAuth.getUid();
+
+                Review review = new Review(fname, lname, sync, attendance, grading, rating, comment, UID);
 
                 database.getReference().child("professors").child("0000001").child("reviews").child("0")
                         .setValue(review).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -106,6 +113,20 @@ public class RateProfessor extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void getName(){
+        database.getReference("users").child(mAuth.getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DataSnapshot snapshot = task.getResult();
+                            fname = String.valueOf(snapshot.child("fName").getValue());
+                            lname = String.valueOf(snapshot.child("lName").getValue());
+                        }
+                    }
+                });
     }
 
     private int convertSyncToInt(String text){

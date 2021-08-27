@@ -2,18 +2,32 @@ package com.example.arrow;
 
 public class Review {
 
+    private String fname;
+    private String lname;
     private int sync;
     private int attendance;
     private int grading;
     private float overall;
     private String comment;
+    private String UID;
 
-    public Review(int sync, int attendance, int grading, float overall, String comment) {
+    public Review(String fname, String lname, int sync, int attendance, int grading, float overall, String comment, String UID) {
+        this.fname = fname;
+        this.lname = lname;
         this.sync = sync;
         this.attendance = attendance;
         this.grading = grading;
         this.overall = overall;
         this.comment = comment;
+        this.UID = UID;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getLname() {
+        return lname;
     }
 
     public int getSync() {
@@ -34,5 +48,9 @@ public class Review {
 
     public String getComment() {
         return comment;
+    }
+
+    public String getUID() {
+        return UID;
     }
 }

@@ -103,7 +103,7 @@ public class ProfessorProfile extends AppCompatActivity {
 //        getCollegeProfessorsCount(profname);
 //        getCommentCount("0000001");
 
-        getCollegeProfessorsCount("Ms. Lim");
+        getCollegeProfessorsCount(profname);
 
         this.viewHome();
         this.viewProfile();
@@ -141,6 +141,9 @@ public class ProfessorProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ProfessorProfile.this, RateProfessor.class);
+                String x = name.getText().toString().trim();
+                String lName = x.split(" ",2)[1];
+                i.putExtra("NAME", lName);
                 startActivity(i);
             }
         });
@@ -170,7 +173,7 @@ public class ProfessorProfile extends AppCompatActivity {
 
     private void getUID(String name){
         String x = name;
-        String searchlName = x.split(" ")[1];
+        String searchlName = x.split(" ",2)[1];
         for (i = 1; i <= collegeProfessorsCount; i++){
             database.getReference().child("professors").child(String.format("%07d", i))
                     .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -185,12 +188,8 @@ public class ProfessorProfile extends AppCompatActivity {
                             Log.d("UID-try", ""+snapshot.getKey());
                             getCommentCount(snapshot.getKey());
                         }
-
-                        }
-
                     }
-
-
+                }
             });
         }
 

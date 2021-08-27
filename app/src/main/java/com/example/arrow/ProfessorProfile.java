@@ -181,11 +181,9 @@ public class ProfessorProfile extends AppCompatActivity {
                         Log.d("NAME", ""+searchlName);
                         Log.d("DATABASE - LastNames", ""+ String.valueOf(snapshot.child("lName").getValue()));
                         Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)));
-
                         if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {
-                            Log.d("UID", ""+(String.format("%07d", i)));
-                            getCommentCount(String.format("%07d", i));
-
+                            Log.d("UID-try", ""+snapshot.getKey());
+                            getCommentCount(snapshot.getKey());
                         }
 
                         }

@@ -50,7 +50,7 @@ public class ProfessorProfile extends AppCompatActivity {
     int commentCount = 0;
     int collegeProfessorsCount = 0;
     String profId;
-    int i;
+    int i = 0;
 
     RecyclerView.Adapter adapter;
 
@@ -100,9 +100,9 @@ public class ProfessorProfile extends AppCompatActivity {
 //        this.img.setImageResource(profimg);
 
         initFirebase();
-//        getCollegeProfessorsCount(profname);
+        getCollegeProfessorsCount(profname);
 //        getDetailsfromID("0000001");
-        getDetailsfromID("0000001");
+//        getDetailsfromID("0000001");
 
         this.viewHome();
         this.viewProfile();
@@ -148,6 +148,52 @@ public class ProfessorProfile extends AppCompatActivity {
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 
+    private void getCollegeProfessorsCount(String profname) {
+        database.getReference().child("professors")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("FIREBASE", ""+snapshot.getChildrenCount());
+                        collegeProfessorsCount = (int) snapshot.getChildrenCount();
+                        getUID(profname);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void getUID(String name){
+        String x = name;
+        String searchlName = x.split(" ")[1];
+        for (i = 1; i <= collegeProfessorsCount; i++){
+            database.getReference().child("professors").child(String.format("%07d", i))
+                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DataSnapshot snapshot = task.getResult();
+                        Log.d("NAME", ""+searchlName);
+
+                        Log.d("DATABASE - LastNames", ""+ String.valueOf(snapshot.child("lName").getValue()));
+
+                        Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)));
+
+                        if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {
+                            Log.d("UID", ""+(String.format("%07d", i)));
+                            getDetailsfromID(String.format("%07d", i));
+
+                        }
+
+                    }
+
+                }
+            });
+        }
+
+    }
+
 
     private void getDetailsfromID (String ID){
         database.getReference().child("professors").child(ID)
@@ -156,11 +202,9 @@ public class ProfessorProfile extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()){
                     DataSnapshot snapshot = task.getResult();
-
                     String fName = String.valueOf(snapshot.child("fName").getValue());
                     String lName = String.valueOf(snapshot.child("lName").getValue());
                     String college = String.valueOf(snapshot.child("college").getValue());
-
                     getCommentCount(ID, fName, lName, college);
                 }
             }

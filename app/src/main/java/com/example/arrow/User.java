@@ -7,12 +7,15 @@ public class User {
     private String fName;
     private String lName;
     private String college;
+    private String pfp;
 
     private int sync;
     private int attendance;
     private int grading;
 
-    public User(String email, String password, String fName, String lName, String college, int sync, int attendance, int grading) {
+
+
+    public User(String email, String password, String fName, String lName, String college, int sync, int attendance, int grading, String pfp) {
         this.email = email;
         this.password = password;
         this.fName = fName;
@@ -21,10 +24,15 @@ public class User {
         this.sync = sync;
         this.attendance = attendance;
         this.grading = grading;
+        this.pfp = pfp;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPfp() {
+        return pfp;
     }
 
     public String getPassword() {

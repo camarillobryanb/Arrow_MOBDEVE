@@ -1,5 +1,6 @@
 package com.example.arrow;
 
+import android.app.MediaRouteButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.*;
 
 public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.FeaturedViewHolder>{
+
     ArrayList<CommentHelperClass> commentItem;
 
     public CommentCardAdapter(ArrayList<CommentHelperClass> commentItem) {
         this.commentItem = commentItem;
+
+        
     }
 
     public static class FeaturedViewHolder extends RecyclerView.ViewHolder {
@@ -30,11 +34,12 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
         TextView grading;
         TextView review;
         RatingBar rating;
+        TextView delete_review;
+
 
 
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
-
             //Hooks
             fName = itemView.findViewById(R.id.comment_first_name);
             lName = itemView.findViewById(R.id.comment_last_name);
@@ -44,8 +49,11 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
             grading = itemView.findViewById(R.id.grading);
             review = itemView.findViewById(R.id.review_comment);
             rating = itemView.findViewById(R.id.overall_rating);
+            delete_review = itemView.findViewById(R.id.delete_review);
         }
     }
+
+
 
     @NonNull
     @Override
@@ -75,5 +83,8 @@ public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.
     public int getItemCount() {
         return commentItem.size();
     }
+
+
+   
 
 }

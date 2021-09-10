@@ -51,6 +51,13 @@ public class ProfessorProfile extends AppCompatActivity {
     int collegeProfessorsCount = 0;
     String profId;
     int i;
+    //TextView delete_review;
+
+    String loggedName;
+
+    String profUID = "";
+
+    Boolean bool;
 
     RecyclerView.Adapter adapter;
 
@@ -64,7 +71,6 @@ public class ProfessorProfile extends AppCompatActivity {
         commentsRecycler = findViewById(R.id.comments_Recycler);
         name = findViewById(R.id.name);
         rbRating = findViewById(R.id.prof_rating);
-
 
         Intent intent = getIntent();
 
@@ -99,6 +105,9 @@ public class ProfessorProfile extends AppCompatActivity {
 //
 //        this.img.setImageResource(profimg);
 
+
+
+
         initFirebase();
 //        getCollegeProfessorsCount(profname);
 //        getCommentCount("0000001");
@@ -112,7 +121,15 @@ public class ProfessorProfile extends AppCompatActivity {
 
 
 
+
+
+
+
     }
+
+
+
+
     private void viewHome() {
         this.iv_home= findViewById(R.id.iv_home);
         this.iv_home.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +161,7 @@ public class ProfessorProfile extends AppCompatActivity {
                 String x = name.getText().toString().trim();
                 String lName = x.split(" ",2)[1];
                 i.putExtra("NAME", lName);
+
                 startActivity(i);
             }
         });
@@ -187,6 +205,8 @@ public class ProfessorProfile extends AppCompatActivity {
                         if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {
                             Log.d("UID-try", ""+snapshot.getKey());
                             getCommentCount(snapshot.getKey());
+
+                            profUID = snapshot.getKey();
                         }
                     }
                 }
@@ -259,13 +279,21 @@ public class ProfessorProfile extends AppCompatActivity {
 
                         commentItem.add(new CommentHelperClass(fName, lName, college, learning, attendance, grading, rating, review));
 
+
+
                         adapter = new CommentCardAdapter(commentItem);
                         commentsRecycler.setAdapter(adapter);
+
+
+
                     }
                 }
             });
         }
     }
+
+
+
 
 
     private void commentsReview() {

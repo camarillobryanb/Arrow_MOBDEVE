@@ -279,19 +279,11 @@ public class userDashboard extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
     private void tryRec(){
         recommendedRecycler.setHasFixedSize(true);
         recommendedRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-
-
-
 
         //CurrentProfessorsRecycler.setHasFixedSize(true);
         //CurrentProfessorsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -334,9 +326,7 @@ public class userDashboard extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
-
                             recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
-
                             adapter = new RecommendedAdapter(recProfs);
                             recommendedRecycler.setAdapter(adapter);
                          }

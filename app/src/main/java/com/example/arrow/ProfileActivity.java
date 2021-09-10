@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView rvRatedProfs;
     RecyclerView.Adapter adapter;
     ImageView iv_home;
+    ImageView profileImage;
     TextView tvLogout;
 
     TextView tvFname;
@@ -60,6 +62,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         tvFname = findViewById(R.id.profile_firstName);
         tvLname = findViewById(R.id.profile_lastName);
+
+        profileImage = findViewById(R.id.prof_Image);
 
         changeHeading();
 
@@ -106,9 +110,12 @@ public class ProfileActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DataSnapshot snapshot = task.getResult();
                     String fname = String.valueOf(snapshot.child("fName").getValue());
+                    String pfp =  String.valueOf(snapshot.child("pfp").getValue());
                     String lname = String.valueOf(snapshot.child("lName").getValue());
                     tvFname.setText(fname);
                     tvLname.setText(lname);
+
+                    profileImage.setImageResource(getResources().getIdentifier(pfp , "drawable", getPackageName()));
                 }
             }
         });
@@ -227,7 +234,6 @@ public class ProfileActivity extends AppCompatActivity {
     private void getRated() {
         Log.d("FIREBASE", ""+ratedCount);
         DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid()).child("rated");
-
         for (int i = 0; i < ratedCount; i++){
             tempdb.child(Integer.toString(i))
                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -240,10 +246,8 @@ public class ProfileActivity extends AppCompatActivity {
                                 displayRated();
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
         }

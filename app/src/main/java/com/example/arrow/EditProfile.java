@@ -24,18 +24,19 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
 
     ImageView iv_home;
     ImageView iv_profile;
-    Spinner sp_changeProfile;
+    private Spinner sp_changeProfile;
 
     private EditText etFname;
     private EditText etLname;
     private Spinner sp_editCollege;
-    private Button btnSubmit;
+    private Button btnSubmit, btnDelete;
 
     String[] avatars = { "Default", "Girl Icon", "Boy Icon" };
 
     // Firebase
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
+    ProfileActivity profileActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +60,24 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
+        btnDelete = findViewById(R.id.btn_delete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteUser();
+            }
+        });
+
+
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
-        Spinner spin = (Spinner) findViewById(R.id.sp_changeProfile);
-        spin.setOnItemSelectedListener(this);
+        sp_changeProfile = (Spinner) findViewById(R.id.sp_changeProfile);
+        sp_changeProfile.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the country list
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,avatars);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
-        spin.setAdapter(aa);
+        sp_changeProfile.setAdapter(aa);
 
         //Spinner for College
         sp_editCollege = (Spinner) findViewById(R.id.sp_editCollege);
@@ -76,17 +86,33 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         sp_editCollege.setAdapter(adapter);
     }
 
+    private void DeleteUser() {
+        database.getReference().child("users").child(mAuth.getUid()).removeValue();
+        Intent i = new Intent(EditProfile.this, LoginActivity.class);
+        startActivity(i);
+
+
+    }
+
     private void updateUser() {
         String fname = etFname.getText().toString().trim();
         String lname = etLname.getText().toString().trim();
         String college = sp_editCollege.getSelectedItem().toString();
+        String pfp = pictoString(sp_changeProfile.getSelectedItem().toString());
+
+        //profileActivity.profileImage.setImageResource(getResources().getIdentifier(pfp , "drawable", getPackageName()));
         if (!checkEmpty(fname, lname)){
             DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid());
             tempdb.child("fName").setValue(fname);
             tempdb.child("lName").setValue(lname);
             tempdb.child("college").setValue(college);
+            tempdb.child("pfp").setValue(pfp);
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();
         }
+
+        Intent i = new Intent(EditProfile.this, ProfileActivity.class);
+        startActivity(i);
+
     }
 
     private boolean checkEmpty(String fName, String lName) {
@@ -127,6 +153,18 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
                 startActivity(i);
             }
         });
+    }
+
+    private String pictoString(String sync){
+        if (sync.equals("Default")){
+            return "default_avatar";
+        } else if (sync.equals("Girl Icon")){
+            return "girl_avatar";
+        } else if (sync.equals("Boy Icon")){
+            return "boy_avatar";
+        }else {
+            return "default_avatar";
+        }
     }
 
     private void viewProfile() {

@@ -131,7 +131,7 @@
 
         <EditText
             android:id="@+id/edit_firstName"
-            android:layout_width="285dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/first_name"
             android:layout_marginLeft="16dp"
@@ -154,7 +154,7 @@
 
         <EditText
             android:id="@+id/edit_LastName"
-            android:layout_width="285dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/last_name"
             android:layout_marginLeft="16dp"
@@ -177,7 +177,7 @@
 
         <Spinner
             android:id="@+id/sp_editCollege"
-            android:layout_width="285dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/College_Name"
             android:layout_marginLeft="16dp"
@@ -187,12 +187,32 @@
             android:text="CCS"
             android:textSize="14dp" />
 
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sp_editCollege"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#B13939"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Delete Profile"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+
 
         <Button
             android:id="@+id/btn_submitedit"
             android:layout_width="202dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sp_editCollege"
+            android:layout_below="@id/btn_delete"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="@color/green"

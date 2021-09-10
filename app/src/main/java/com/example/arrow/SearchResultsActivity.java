@@ -107,6 +107,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
 
+
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
@@ -139,18 +140,39 @@ public class SearchResultsActivity extends AppCompatActivity {
                     .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    Log.d("SearchItem", ""+searchItem);
+
+
+
+                  //  String name = "Jules Tan";
+
+
+
+                  //  Log.d("SearchItem", ""+searchItem);
 
                     if (task.isSuccessful()){
                         DataSnapshot snapshot = task.getResult();
 
-                        Log.d("SearchItem", ""+searchItem);
+                        String profFullname = String.valueOf(snapshot.child("fName").getValue())+" "+String.valueOf(snapshot.child("lName").getValue());
 
-                        Log.d("LastNames", ""+ String.valueOf(snapshot.child("lName").getValue()));
+                       // Log.d("SearchItem", ""+searchItem);
+                        Log.d("profFullName", ""+profFullname);
+                        //Log.d("LastNames", ""+ String.valueOf(snapshot.child("lName").getValue()));
 
-                        Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ));
+                        //Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ));
 
+                        // search for Last Name
                         if(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ) {
+                            String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                            String lname = String.valueOf(snapshot.child("lName").getValue());
+                            String college = String.valueOf(snapshot.child("college").getValue());
+                            float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                            adapter = new AddFeaturedProfAdapter(resultItem);
+                            searchResultsRecycler.setAdapter(adapter);
+                        }
+
+                        // search for First Name
+                        if(String.valueOf(snapshot.child("fName").getValue()).equals(searchItem) ) {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
@@ -162,6 +184,35 @@ public class SearchResultsActivity extends AppCompatActivity {
                             searchResultsRecycler.setAdapter(adapter);
 
                         }
+
+                        // search for College
+
+                        if(String.valueOf(snapshot.child("college").getValue()).equals(searchItem) ) {
+                            String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                            String lname = String.valueOf(snapshot.child("lName").getValue());
+                            String college = String.valueOf(snapshot.child("college").getValue());
+                            float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+
+                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            adapter = new AddFeaturedProfAdapter(resultItem);
+                            searchResultsRecycler.setAdapter(adapter);
+
+                        }
+
+                        if(profFullname.equals(searchItem) ) {
+                            String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
+                            String lname = String.valueOf(snapshot.child("lName").getValue());
+                            String college = String.valueOf(snapshot.child("college").getValue());
+                            float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+
+                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            adapter = new AddFeaturedProfAdapter(resultItem);
+                            searchResultsRecycler.setAdapter(adapter);
+
+                        }
+
 
 
                     }

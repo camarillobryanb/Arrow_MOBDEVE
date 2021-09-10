@@ -110,7 +110,6 @@ public class RateProfessor extends AppCompatActivity {
                 int selectedGrading = rgGrading.getCheckedRadioButtonId();
                 rbGrading = (RadioButton) findViewById(selectedGrading);
                 int grading = convertGradingToInt(rbGrading.getText().toString());
-
                 float rating = (float) rateOverall.getRating();
 
                 String comment = etReview.getText().toString().trim();

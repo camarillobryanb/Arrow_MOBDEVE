@@ -65,6 +65,7 @@ public class Register2Activity extends AppCompatActivity implements AdapterView.
         spCollege.setAdapter(adapter1);
         spCollege.setOnItemSelectedListener(this);
 
+
         initComponents();
     }
 
@@ -133,8 +134,10 @@ public class Register2Activity extends AppCompatActivity implements AdapterView.
         int nSync = syncToInt(spSync.getSelectedItem().toString());
         int nAttendance = syncToAttendance(spAttendance.getSelectedItem().toString());
         int nGrading = syncToGrading(spGrading.getSelectedItem().toString());
+        String pfp = "default_avatar";
 
-        User user = new User(etEmail, etPassword, etFName.getText().toString().trim(), etLName.getText().toString().trim(), college, nSync, nAttendance, nGrading);
+
+        User user = new User(etEmail, etPassword, etFName.getText().toString().trim(), etLName.getText().toString().trim(), college, nSync, nAttendance, nGrading, pfp);
 
         database.getReference("users")
                 .child(UID)

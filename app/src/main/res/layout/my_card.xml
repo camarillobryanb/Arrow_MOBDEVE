@@ -17,15 +17,15 @@
 
         <ImageView
             android:id="@+id/delete_button"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="right"
             android:layout_marginBottom="3dp"
             android:background="@color/white"
             android:src="@drawable/delete_icon"
-            android:visibility="invisible" />
+            />
 
         <ImageView
             android:id="@+id/featured_image"
@@ -54,12 +54,12 @@
 
         <TextView
             android:id="@+id/featured_desc"
-            android:layout_below="@id/ratingBar"
-            android:layout_marginTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ratingBar"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/open_sans"
-            android:text="Computer Science Professor" />
+            android:text="CCS" />
 
 
 

@@ -77,7 +77,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/open_sans"
-            android:text="Enter Professor's Name" />
+            android:hint="Enter Professor's Name" />
 
         <EditText
             android:id="@+id/submitProfCollege"
@@ -87,7 +87,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/open_sans"
-            android:text="Enter College or Subject"/>
+            android:hint="Enter College or Subject"/>
         <EditText
             android:id="@+id/submitDesc"
             android:layout_width="285dp"
@@ -96,7 +96,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/open_sans"
-            android:text="Specify Concern" />
+            android:hint="Specify Concern" />
 
 
         <Button

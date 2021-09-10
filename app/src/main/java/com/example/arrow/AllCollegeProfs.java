@@ -91,7 +91,7 @@ public class AllCollegeProfs extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Log.d("FIREBASE TOP RATED", ""+snapshot.getChildrenCount());
+                      //  Log.d("FIREBASE TOP RATED", ""+snapshot.getChildrenCount());
                         topRatedProfessorsCount = (int) snapshot.getChildrenCount();
                         TopRatedProfessors();
                     }

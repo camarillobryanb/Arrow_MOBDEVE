@@ -3,6 +3,7 @@ package com.example.arrow;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -14,9 +15,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +36,10 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
     private Spinner sp_editCollege;
     private Button btnSubmit, btnDelete;
 
+    private ImageView profImage;
+
     String[] avatars = { "Default", "Girl Icon", "Boy Icon" };
+    String studentID;
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -44,13 +52,19 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.edit_profile);
 
+
+
+
+
         initFirebase();
+         studentID = mAuth.getUid();
 
         this.viewHome();
         this.viewProfile();
 
         etFname = findViewById(R.id.edit_firstName);
         etLname = findViewById(R.id.edit_LastName);
+        profImage = findViewById(R.id.prof_Image);
 
         btnSubmit = findViewById(R.id.btn_submitedit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +98,62 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.colleges, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_editCollege.setAdapter(adapter);
+
+
+
+        getCollege();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private void getCollege() {
+
+        Log.d("studid getcollege", ""+studentID);
+
+
+        database.getReference().child("users").child(studentID)
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("task successful", "1");
+
+                if (task.isSuccessful()) {
+                    DataSnapshot snapshot = task.getResult();
+                    Log.d("task successful", ""+snapshot.child("college").getValue() );
+                    String college = String.valueOf(snapshot.child("college").getValue());
+                    String pfp =  String.valueOf(snapshot.child("pfp").getValue());
+                    String lname = String.valueOf(snapshot.child("lName").getValue());
+                    String fname = String.valueOf(snapshot.child("fName").getValue());
+                    etFname.setText(fname);
+                    etLname.setText(lname);
+                    profImage.setImageResource(getResources().getIdentifier(pfp , "drawable", getPackageName()));
+
+                    int index = 0;
+                    for(int i = 0; i < sp_editCollege.getCount(); i++){
+                        Log.d("sp position:", ""+sp_editCollege.getItemAtPosition(i));
+                        if(sp_editCollege.getItemAtPosition(i).toString().equals(college)){
+
+                            sp_editCollege.setSelection(i);
+                            break;
+                        }
+                    }
+
+
+
+                }
+            }
+        });
     }
 
     private void DeleteUser() {
@@ -172,7 +242,7 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(EditProfile.this, ProfileActivity.class);
+                Intent i = new Intent(EditProfile.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

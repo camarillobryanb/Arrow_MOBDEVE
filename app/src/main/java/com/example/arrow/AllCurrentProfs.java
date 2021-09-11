@@ -88,7 +88,7 @@ public class AllCurrentProfs extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AllCurrentProfs.this, ProfileActivity.class);
+                Intent i = new Intent(AllCurrentProfs.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

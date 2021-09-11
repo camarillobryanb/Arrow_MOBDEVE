@@ -111,7 +111,7 @@ public class userDashboard extends AppCompatActivity {
         this.ivMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(userDashboard.this, ProfileActivity.class);
+                Intent i = new Intent(userDashboard.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

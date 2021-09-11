@@ -80,7 +80,7 @@ public class AllCollegeProfs extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AllCollegeProfs.this, ProfileActivity.class);
+                Intent i = new Intent(AllCollegeProfs.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

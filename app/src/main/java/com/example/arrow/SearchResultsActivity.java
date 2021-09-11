@@ -88,7 +88,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SearchResultsActivity.this, ProfileActivity.class);
+                Intent i = new Intent(SearchResultsActivity.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

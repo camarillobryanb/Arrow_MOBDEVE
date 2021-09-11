@@ -93,7 +93,7 @@ public class AllRecommendedProfs extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AllRecommendedProfs.this, ProfileActivity.class);
+                Intent i = new Intent(AllRecommendedProfs.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

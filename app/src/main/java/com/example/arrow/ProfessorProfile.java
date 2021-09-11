@@ -146,7 +146,7 @@ public class ProfessorProfile extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ProfessorProfile.this, ProfileActivity.class);
+                Intent i = new Intent(ProfessorProfile.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

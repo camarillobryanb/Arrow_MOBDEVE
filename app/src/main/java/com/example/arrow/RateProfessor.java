@@ -277,7 +277,7 @@ public class RateProfessor extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RateProfessor.this, ProfileActivity.class);
+                Intent i = new Intent(RateProfessor.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

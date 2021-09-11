@@ -142,7 +142,7 @@ public class SubmitRequestActivity extends AppCompatActivity {
         this.iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SubmitRequestActivity.this, ProfileActivity.class);
+                Intent i = new Intent(SubmitRequestActivity.this, OwnProfileActivity.class);
                 startActivity(i);
             }
         });

@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProfileActivity extends AppCompatActivity {
+public class OwnProfileActivity extends AppCompatActivity {
 
     RecyclerView rvFeaturedProfs;
     RecyclerView rvRatedProfs;
@@ -36,7 +36,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     TextView tvFname;
     TextView tvLname;
-    ImageView iv_profile;
     TextView editProfileButton;
 
     // Counts
@@ -69,9 +68,9 @@ public class ProfileActivity extends AppCompatActivity {
         String studentID = mAuth.getUid();
         Log.d("student ID?", ""+studentID);
 
-        Intent intent = getIntent();
+        /**Intent intent = getIntent();
         if(intent.getStringExtra(CommentCardAdapter.KEY_NAME) != "")
-            studentID = intent.getStringExtra(CommentCardAdapter.KEY_NAME);
+            studentID = intent.getStringExtra(CommentCardAdapter.KEY_NAME);**/
 
         Log.d("student ID 2", ""+studentID);
 
@@ -82,30 +81,22 @@ public class ProfileActivity extends AppCompatActivity {
         rvRatedProfs = findViewById(R.id.myRated_Recycler);
 
         tvLogout = findViewById(R.id.logout_name);
-        editProfileButton= findViewById(R.id.editprofile_button);
-
-        tvLogout.setVisibility(View.GONE);
-        editProfileButton.setVisibility(View.GONE);
 
         displayMyFeaturedProfessors(studentID);
         displayMyRatedProfessors(studentID);
 
         //this.viewAddFeaturedPage();
         this.viewHome();
-        this.viewProfile();
-        //this.viewEditProf();
+        this.viewEditProf();
 
 
-
-    }
-
-    private void viewProfile() {
-        this.iv_profile= findViewById(R.id.iv_profile);
-        this.iv_profile.setOnClickListener(new View.OnClickListener() {
+        tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, OwnProfileActivity.class);
+                mAuth.signOut();
+                Intent i = new Intent(OwnProfileActivity.this, LoginActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -115,18 +106,13 @@ public class ProfileActivity extends AppCompatActivity {
         this.editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, EditProfile.class);
+                Intent i = new Intent(OwnProfileActivity.this, EditProfile.class);
                 startActivity(i);
             }
         });
     }
 
     private void changeHeading(String ID) {
-        Log.d("ID", ""+ID);
-        Log.d("error?", ""+database.getReference().child("users").child(ID)
-                .get());
-
-
         database.getReference().child("users").child(ID)
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -214,7 +200,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                         dataProfs.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample, rating));
 
-                        adapter = new OtherProfsAdapter(dataProfs);
+                        adapter = new MyProfsAdapter(dataProfs);
                         rvFeaturedProfs.setAdapter(adapter);
                     }
                 }
@@ -227,7 +213,7 @@ public class ProfileActivity extends AppCompatActivity {
         this.iv_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, userDashboard.class);
+                Intent i = new Intent(OwnProfileActivity.this, userDashboard.class);
                 startActivity(i);
             }
         });
@@ -295,7 +281,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                         dataRated.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample, rating));
 
-                        adapter = new OtherProfsAdapter(dataRated);
+                        adapter = new MyProfsAdapter(dataRated);
                         rvRatedProfs.setAdapter(adapter);
                     }
                 }

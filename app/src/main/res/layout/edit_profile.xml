@@ -141,7 +141,7 @@
             android:textSize="14dp" />
 
         <TextView
-            android:id="@+id/last_name"
+            android:id="@+id/ed_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -156,7 +156,7 @@
             android:id="@+id/edit_LastName"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/last_name"
+            android:layout_below="@id/ed_last_name"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/open_sans"

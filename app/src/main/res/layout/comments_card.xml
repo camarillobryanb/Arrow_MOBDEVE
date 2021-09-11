@@ -8,6 +8,7 @@
     android:layout_margin="10dp">
 
     <RelativeLayout
+        android:id="@+id/rl_comment_card"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="10dp">
@@ -22,18 +23,18 @@
             android:text="Jane"
             android:textColor="@color/black"
             android:textSize="12sp" />
+
         <TextView
             android:id="@+id/comment_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:layout_toRightOf="@+id/comment_first_name"
             android:fontFamily="@font/poppins_bold"
             android:lineHeight="20dp"
             android:text="Dela Cruz"
-            android:layout_marginLeft="3dp"
             android:textColor="@color/black"
             android:textSize="12sp" />
-
 
 
         <TextView
@@ -92,25 +93,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/overall_rating"
-            android:layout_toRightOf="@id/learning_event"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/learning_event"
             android:fontFamily="@font/open_sans_bold"
             android:text="Important Attendance"
             android:textColor="@color/purple_700"
 
             android:textSize="8.5dp" />
+
         <TextView
             android:id="@+id/grading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/overall_rating"
-            android:layout_toRightOf="@id/attendance"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="8dp"
-            android:textColor="@color/blue"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/attendance"
             android:fontFamily="@font/open_sans_bold"
             android:text="Pure Exams"
+            android:textColor="@color/blue"
             android:textSize="8.5dp" />
 
         <TextView
@@ -124,6 +126,12 @@
             android:textColor="@color/black"
             android:textSize="8.5dp" />
 
+        <TextView
+            android:id="@+id/student_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:visibility="gone" />
 
 
     </RelativeLayout>

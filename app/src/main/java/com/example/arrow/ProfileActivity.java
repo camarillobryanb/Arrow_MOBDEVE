@@ -65,15 +65,21 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.prof_Image);
 
-        changeHeading();
+        String studentID = mAuth.getUid();
+
+        Intent intent = getIntent();
+        if(intent.getStringExtra(CommentCardAdapter.KEY_NAME) != "")
+            studentID = intent.getStringExtra(CommentCardAdapter.KEY_NAME);
+
+        changeHeading(studentID);
 
         rvFeaturedProfs = findViewById(R.id.myFeat_Recycler);
         rvRatedProfs = findViewById(R.id.myRated_Recycler);
 
         tvLogout = findViewById(R.id.logout_name);
 
-        displayMyFeaturedProfessors();
-        displayMyRatedProfessors();
+        displayMyFeaturedProfessors(studentID);
+        displayMyRatedProfessors(studentID);
 
         //this.viewAddFeaturedPage();
         this.viewHome();
@@ -102,8 +108,8 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void changeHeading() {
-        database.getReference().child("users").child(mAuth.getUid())
+    private void changeHeading(String ID) {
+        database.getReference().child("users").child(ID)
                 .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -127,18 +133,18 @@ public class ProfileActivity extends AppCompatActivity {
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 
-    private void displayMyFeaturedProfessors() {
-        getFeaturedCount();
+    private void displayMyFeaturedProfessors(String id) {
+        getFeaturedCount(id);
     }
 
-    private void getFeaturedCount() {
-        database.getReference().child("users").child(mAuth.getUid()).child("featured")
+    private void getFeaturedCount(String id) {
+        database.getReference().child("users").child(id).child("featured")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Log.d("FIREBASE", ""+snapshot.getChildrenCount());
                         featuredCount = (int) snapshot.getChildrenCount();
-                        getFeatured();
+                        getFeatured(id);
                     }
 
                     @Override
@@ -148,9 +154,9 @@ public class ProfileActivity extends AppCompatActivity {
                 });
     }
 
-    private void getFeatured() {
+    private void getFeatured(String id) {
         Log.d("FIREBASE", ""+featuredCount);
-        DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid()).child("featured");
+        DatabaseReference tempdb = database.getReference().child("users").child(id).child("featured");
         for (int i = 0; i < featuredCount; i++){
             tempdb.child(Integer.toString(i))
                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -210,18 +216,18 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void displayMyRatedProfessors() {
-        getRatedCount();
+    private void displayMyRatedProfessors(String id) {
+        getRatedCount(id);
     }
 
-    private void getRatedCount() {
-        database.getReference().child("users").child(mAuth.getUid()).child("rated")
+    private void getRatedCount(String id) {
+        database.getReference().child("users").child(id).child("rated")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Log.d("FIREBASE", ""+snapshot.getChildrenCount());
                         ratedCount = (int) snapshot.getChildrenCount();
-                        getRated();
+                        getRated(id);
                     }
 
                     @Override
@@ -231,9 +237,9 @@ public class ProfileActivity extends AppCompatActivity {
                 });
     }
 
-    private void getRated() {
+    private void getRated(String id) {
         Log.d("FIREBASE", ""+ratedCount);
-        DatabaseReference tempdb = database.getReference().child("users").child(mAuth.getUid()).child("rated");
+        DatabaseReference tempdb = database.getReference().child("users").child(id).child("rated");
         for (int i = 0; i < ratedCount; i++){
             tempdb.child(Integer.toString(i))
                     .addListenerForSingleValueEvent(new ValueEventListener() {

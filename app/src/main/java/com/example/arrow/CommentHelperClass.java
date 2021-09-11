@@ -1,10 +1,19 @@
 package com.example.arrow;
 
 public class CommentHelperClass {
-    String fName, lName, course, learning, attendance, grading, review;
+    String fName;
+    String lName;
+    String course;
+
+    String learning;
+    String attendance;
+    String grading;
+    String review;
+    String studentID;
     float rating;
 
-    public CommentHelperClass(String fName, String lName, String course, String learning, String attendance, String grading, String review) {
+    public CommentHelperClass(String studentID, String fName, String lName, String course, String learning, String attendance, String grading, String review) {
+        this.studentID = studentID;
         this.fName = fName;
         this.lName = lName;
         this.course = course;
@@ -14,7 +23,8 @@ public class CommentHelperClass {
         this.review = review;
     }
 
-    public CommentHelperClass(String fName, String lName, String course, int rLearning, int rAttendance, int rGrade, float rating, String review) {
+    public CommentHelperClass(String studentID, String fName, String lName, String course, int rLearning, int rAttendance, int rGrade, float rating, String review) {
+        this.studentID = studentID;
         this.fName = fName;
         this.lName = lName;
         this.course = course;
@@ -55,6 +65,14 @@ public class CommentHelperClass {
             this.grading = "Pure Exams";
 
         this.review = review;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 
     public float getRating() {

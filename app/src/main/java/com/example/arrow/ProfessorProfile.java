@@ -268,6 +268,7 @@ public class ProfessorProfile extends AppCompatActivity {
                     if (task.isSuccessful()){
                         DataSnapshot snapshot = task.getResult();
 
+                        String id = String.valueOf(snapshot.child("uid").getValue());
                         String fName = String.valueOf(snapshot.child("fname").getValue());
                         String lName = String.valueOf(snapshot.child("lname").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
@@ -280,7 +281,7 @@ public class ProfessorProfile extends AppCompatActivity {
 
 //                        commentItem.add(new CommentHelperClass(fName, lName, college, learning, attendance, grading, rating, review));
 
-                        commentItem.add(new CommentHelperClass(fName, lName, college, learning, attendance, grading, rating, review));
+                        commentItem.add(new CommentHelperClass(id, fName, lName, college, learning, attendance, grading, rating, review));
 
 
 
@@ -305,15 +306,15 @@ public class ProfessorProfile extends AppCompatActivity {
 
         ArrayList<CommentHelperClass> commentItem = new ArrayList<>();
 
-        commentItem.add(new CommentHelperClass("Jane", "Dela Cruz", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("123", "Jane", "Dela Cruz", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("Juan", "Santos", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("123", "Juan", "Santos", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("John", "Perez", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("123", "John", "Perez", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("Peter", "Parker", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("123", "Peter", "Parker", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
-        commentItem.add(new CommentHelperClass("Tony", "Stark", "BSIT", "Pure Synchronous",
+        commentItem.add(new CommentHelperClass("123", "Tony", "Stark", "BSIT", "Pure Synchronous",
                 "Imporant Attendance", "Pure Exams", getResources().getString(R.string.rev_comment)));
 
 

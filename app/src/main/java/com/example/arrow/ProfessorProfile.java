@@ -189,8 +189,8 @@ public class ProfessorProfile extends AppCompatActivity {
                 });
    }
 
-    private void getUID(String name){
-        String x = name;
+    private void getUID(String fullname){
+        String x = fullname;
         String searchlName = x.split(" ",2)[1];
         for (i = 1; i <= collegeProfessorsCount; i++){
             database.getReference().child("professors").child(String.format("%07d", i))
@@ -204,6 +204,9 @@ public class ProfessorProfile extends AppCompatActivity {
                         Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)));
                         if (String.valueOf(snapshot.child("lName").getValue()).equals(searchlName)) {
                             Log.d("UID-try", ""+snapshot.getKey());
+                            String fName = String.valueOf(snapshot.child("fName").getValue());
+                            String lName = String.valueOf(snapshot.child("lName").getValue());
+                            name.setText(fName + " " + lName);
                             getCommentCount(snapshot.getKey());
 
                             profUID = snapshot.getKey();

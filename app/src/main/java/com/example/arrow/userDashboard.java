@@ -335,11 +335,6 @@ public class userDashboard extends AppCompatActivity {
                 }
             });
         }
-
-
-
-
-
     }
 
     private void CurrentProfessors() {

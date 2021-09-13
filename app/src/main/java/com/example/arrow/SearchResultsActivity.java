@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,15 +32,12 @@ public class SearchResultsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
-
     int collegeProfessorsCount = 0;
-
 
     ArrayList<RecommendedHelperClass> resultItem = new ArrayList<>();
 
     ImageView iv_home;
     ImageView iv_profile;
-
 
     RecyclerView searchResultsRecycler;
     TextView tvSubmitRequest;
@@ -105,9 +103,6 @@ public class SearchResultsActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance("https://arrow-848c3-default-rtdb.asia-southeast1.firebasedatabase.app/");
@@ -121,6 +116,9 @@ public class SearchResultsActivity extends AppCompatActivity {
                         Log.d("FIREBASE-SEARCH", ""+snapshot.getChildrenCount());
                         collegeProfessorsCount = (int) snapshot.getChildrenCount();
                         SearchResults();
+
+
+
                     }
 
                     @Override
@@ -212,9 +210,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                             searchResultsRecycler.setAdapter(adapter);
 
                         }
-
-
-
                     }
                 }
             });

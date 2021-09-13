@@ -27,8 +27,6 @@ public class AddFeaturedProfActivity extends AppCompatActivity {
         collegeProfsRecycler = findViewById(R.id.allCollege_Recycler);
 
         collegeProfessors();
-
-
     }
 
     private void collegeProfessors() {

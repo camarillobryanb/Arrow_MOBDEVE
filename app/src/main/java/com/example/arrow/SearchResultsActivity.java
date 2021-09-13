@@ -164,7 +164,9 @@ public class SearchResultsActivity extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
-                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
+
+                            resultItem.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()),pronoun + " " + lname, college, rating));
                             adapter = new AddFeaturedProfAdapter(resultItem);
                             searchResultsRecycler.setAdapter(adapter);
                         }
@@ -175,8 +177,13 @@ public class SearchResultsActivity extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+
+
+
+                            resultItem.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
                             adapter = new AddFeaturedProfAdapter(resultItem);
                             searchResultsRecycler.setAdapter(adapter);
@@ -190,8 +197,10 @@ public class SearchResultsActivity extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            resultItem.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
                             adapter = new AddFeaturedProfAdapter(resultItem);
                             searchResultsRecycler.setAdapter(adapter);
@@ -203,8 +212,10 @@ public class SearchResultsActivity extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                            resultItem.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            resultItem.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()),pronoun + " " + lname, college, rating));
 
                             adapter = new AddFeaturedProfAdapter(resultItem);
                             searchResultsRecycler.setAdapter(adapter);

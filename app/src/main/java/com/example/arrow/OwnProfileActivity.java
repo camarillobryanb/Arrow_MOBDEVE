@@ -197,8 +197,10 @@ public class OwnProfileActivity extends AppCompatActivity {
                         String lname = String.valueOf(snapshot.child("lName").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
                         float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                        String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                        dataProfs.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample, rating));
+
+                        dataProfs.add(new MyCardHelperClass(pronoun + " " + lname, college, getResources().getIdentifier(pic, "drawable", getPackageName()), rating));
 
                         adapter = new MyProfsAdapter(dataProfs);
                         rvFeaturedProfs.setAdapter(adapter);
@@ -278,8 +280,10 @@ public class OwnProfileActivity extends AppCompatActivity {
                         String lname = String.valueOf(snapshot.child("lName").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
                         float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                        String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                        dataRated.add(new MyCardHelperClass(pronoun + " " + lname, college, R.drawable.prof_sample, rating));
+
+                        dataRated.add(new MyCardHelperClass(pronoun + " " + lname, college, getResources().getIdentifier(pic, "drawable", getPackageName()), rating));
 
                         adapter = new MyProfsAdapter(dataRated);
                         rvRatedProfs.setAdapter(adapter);

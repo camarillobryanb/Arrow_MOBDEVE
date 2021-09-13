@@ -162,8 +162,10 @@ public class AllRecommendedProfs extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            recProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
                             adapter = new AllCardsAdapter(recProfs);
                             recommendedRecycler.setAdapter(adapter);
@@ -173,8 +175,10 @@ public class AllRecommendedProfs extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                            recProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
 
                             adapter = new AllCardsAdapter(recProfs);

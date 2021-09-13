@@ -39,6 +39,7 @@ public class ProfessorProfile extends AppCompatActivity {
     ImageView iv_home;
     ImageView commentButton;
     RatingBar rbRating;
+    ImageView mv_image;
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -71,6 +72,7 @@ public class ProfessorProfile extends AppCompatActivity {
         commentsRecycler = findViewById(R.id.comments_Recycler);
         name = findViewById(R.id.name);
         rbRating = findViewById(R.id.prof_rating);
+        mv_image=findViewById(R.id.mv_image);
 
         Intent intent = getIntent();
 
@@ -206,7 +208,16 @@ public class ProfessorProfile extends AppCompatActivity {
                             Log.d("UID-try", ""+snapshot.getKey());
                             String fName = String.valueOf(snapshot.child("fName").getValue());
                             String lName = String.valueOf(snapshot.child("lName").getValue());
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
+
+                            mv_image.setImageResource(getResources().getIdentifier(pic , "drawable", getPackageName()));
+
+
                             name.setText(fName + " " + lName);
+
+
+
+
                             getCommentCount(snapshot.getKey());
 
                             profUID = snapshot.getKey();

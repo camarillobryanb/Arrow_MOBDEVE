@@ -248,8 +248,14 @@ public class userDashboard extends AppCompatActivity {
                         String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                         String lname = String.valueOf(snapshot.child("lName").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
+                        String pic = String.valueOf(snapshot.child("pic").getValue());
+
                         float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
-                        topRatedProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+
+
+
+                        topRatedProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
                         topRatedProfs.sort(new RateSorter());
                         adapter = new CollegeProfAdapter(topRatedProfs);
                         CollegeProfessorsRecycler.setAdapter(adapter);
@@ -302,9 +308,11 @@ public class userDashboard extends AppCompatActivity {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
+
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
 
-                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                            recProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
                             adapter = new RecommendedAdapter(recProfs);
                             recommendedRecycler.setAdapter(adapter);
@@ -313,9 +321,11 @@ public class userDashboard extends AppCompatActivity {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
+
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
 
-                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                            recProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
                             adapter = new RecommendedAdapter(recProfs);
                             recommendedRecycler.setAdapter(adapter);
@@ -326,7 +336,9 @@ public class userDashboard extends AppCompatActivity {
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
                             float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
-                            recProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+                            String pic = String.valueOf(snapshot.child("pic").getValue());
+
+                            recProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
                             adapter = new RecommendedAdapter(recProfs);
                             recommendedRecycler.setAdapter(adapter);
                          }
@@ -358,8 +370,10 @@ public class userDashboard extends AppCompatActivity {
                         String lname = String.valueOf(snapshot.child("lName").getValue());
                         String college = String.valueOf(snapshot.child("college").getValue());
                         float rating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                        String pic = String.valueOf(snapshot.child("pic").getValue());
 
-                        currProfs.add(new RecommendedHelperClass(R.drawable.prof_sample ,pronoun + " " + lname, college, rating));
+
+                        currProfs.add(new RecommendedHelperClass(getResources().getIdentifier(pic, "drawable", getPackageName()) ,pronoun + " " + lname, college, rating));
 
                         adapter = new CollegeProfAdapter(currProfs);
                         CurrentProfessorsRecycler.setAdapter(adapter);

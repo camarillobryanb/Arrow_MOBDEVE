@@ -211,6 +211,7 @@ public class RateProfessor extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()){
                             DataSnapshot snapshot = task.getResult();
+
                             fname = String.valueOf(snapshot.child("fName").getValue());
                             lname = String.valueOf(snapshot.child("lName").getValue());
                             college = String.valueOf(snapshot.child("college").getValue());

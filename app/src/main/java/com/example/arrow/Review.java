@@ -57,6 +57,6 @@ public class Review {
     }
 
     public String getCollege() {
-        return UID;
+        return college;
     }
 }

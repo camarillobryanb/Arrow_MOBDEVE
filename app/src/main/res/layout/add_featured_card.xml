@@ -58,6 +58,7 @@
             android:padding="2dp"
             android:text="@string/addButton"
             android:textColor="@color/white"
+            android:visibility="gone"
             android:textSize="11sp" />
 
 

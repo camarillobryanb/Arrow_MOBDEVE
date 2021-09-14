@@ -107,8 +107,33 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="55dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:rating="4.5" />
+
+                <Button
+                    android:id="@+id/btn_addToFeatured"
+                    android:layout_width="500px"
+                    android:layout_height="80px"
+                    android:layout_below="@id/prof_rating"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@drawable/rounded_button"
+                    android:fontFamily="@font/poppins_semibold"
+
+
+                    android:foregroundGravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="Add to Featured"
+                    android:textColor="@color/white"
+
+                    android:textSize="14sp"
+
+
+                    />
+
 
 
                 <RelativeLayout
@@ -121,7 +146,7 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/search_box_bg"
                         android:elevation="8dp"
-                        android:layout_below="@id/prof_rating">
+                        android:layout_below="@id/btn_addToFeatured">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -160,17 +185,6 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/Comment_title" />
 
-                <Button
-                    android:id="@+id/btn_addToFeatured"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/name"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="294dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginEnd="11dp"
-                    android:text="Add" />
 
 
             </RelativeLayout>

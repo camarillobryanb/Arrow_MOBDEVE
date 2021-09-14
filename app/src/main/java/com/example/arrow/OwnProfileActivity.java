@@ -202,7 +202,7 @@ public class OwnProfileActivity extends AppCompatActivity {
 
                         dataProfs.add(new MyCardHelperClass(pronoun + " " + lname, college, getResources().getIdentifier(pic, "drawable", getPackageName()), rating));
 
-                        adapter = new MyProfsAdapter(dataProfs);
+                        adapter = new OtherProfsAdapter(dataProfs);
                         rvFeaturedProfs.setAdapter(adapter);
                     }
                 }

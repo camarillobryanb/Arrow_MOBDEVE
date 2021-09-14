@@ -134,7 +134,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Arrow's recommended professors based on what you want!" />
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="Arrow's recommended professors based on what you want!"
+                        android:textColor="#FFFFFF" />
 
                 </LinearLayout>
 

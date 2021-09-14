@@ -19,6 +19,7 @@ public class AddFeaturedProfAdapter extends RecyclerView.Adapter<AddFeaturedProf
     public static final String KEY_NAME = "KEY_NAME";
     public static final String KEY_IMG = "KEY_IMG";
     public static final String KEY_DESC = "KEY_DESC";
+    public static final String KEY_UID = "KEY_UID";
 
     public AddFeaturedProfAdapter(ArrayList<RecommendedHelperClass> cardProfs) {
         this.cardProfs = cardProfs;
@@ -65,6 +66,7 @@ public class AddFeaturedProfAdapter extends RecyclerView.Adapter<AddFeaturedProf
                 intent.putExtra(KEY_NAME, cardProfs.get(position).getName());
                 intent.putExtra(KEY_IMG, cardProfs.get(position).getImage());
                 intent.putExtra(KEY_DESC, cardProfs.get(position).getDescription());
+                //intent.putExtra(KEY_UID, cardProfs.get(position).get)
                 v.getContext().startActivity(intent);
             }
         });

@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,12 +43,16 @@ public class ProfessorProfile extends AppCompatActivity {
     RatingBar rbRating;
     ImageView mv_image;
 
+    Button btn_addFeatured;
+
     // Firebase
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
     ArrayList<CommentHelperClass> commentItem = new ArrayList<>();
     ArrayList<String> lNames = new ArrayList<>();
+
+    int featuredCount;
 
     int commentCount = 0;
     int collegeProfessorsCount = 0;
@@ -73,6 +79,7 @@ public class ProfessorProfile extends AppCompatActivity {
         name = findViewById(R.id.name);
         rbRating = findViewById(R.id.prof_rating);
         mv_image=findViewById(R.id.mv_image);
+        btn_addFeatured = findViewById(R.id.btn_addToFeatured);
 
         Intent intent = getIntent();
 
@@ -107,9 +114,6 @@ public class ProfessorProfile extends AppCompatActivity {
 //
 //        this.img.setImageResource(profimg);
 
-
-
-
         initFirebase();
 //        getCollegeProfessorsCount(profname);
 //        getCommentCount("0000001");
@@ -120,17 +124,52 @@ public class ProfessorProfile extends AppCompatActivity {
         this.viewProfile();
         this.rateProf();
 
-
-
-
-
-
-
-
+        btn_addFeatured.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFeaturedCount();
+            }
+        });
     }
 
+    private void addToFeatured() {
+        database.getReference().child("users").child(mAuth.getUid()).child("featured").child(featuredCount+"")
+                .setValue(profUID).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    isSuccessful();
+                } else {
+                    isFail();
+                }
+            }
+        });
+    }
 
+    private void isSuccessful(){
+        Toast.makeText(this, "Successfully Added", Toast.LENGTH_SHORT).show();
+    }
 
+    private void isFail(){
+        Toast.makeText(this, "Error Occurred.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void getFeaturedCount(){
+        database.getReference().child("users").child(mAuth.getUid()).child("featured")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("SNAPSHOT COUNT", ""+snapshot.getChildrenCount());
+                        featuredCount = (int) snapshot.getChildrenCount();
+                        addToFeatured();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
 
     private void viewHome() {
         this.iv_home= findViewById(R.id.iv_home);

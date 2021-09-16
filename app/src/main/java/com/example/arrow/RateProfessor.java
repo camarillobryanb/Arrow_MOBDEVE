@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -111,6 +112,7 @@ public class RateProfessor extends AppCompatActivity {
                 rbGrading = (RadioButton) findViewById(selectedGrading);
                 int grading = convertGradingToInt(rbGrading.getText().toString());
                 float rating = (float) rateOverall.getRating();
+                updateOverallRating(profUID, rating);
 
                 String comment = etReview.getText().toString().trim();
 
@@ -128,6 +130,25 @@ public class RateProfessor extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+    }
+
+    public void updateOverallRating(String UID, float rating){
+
+        database.getReference().child("professors").child(UID)
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Log.d("task successful", "1");
+
+                if (task.isSuccessful()) {
+                    DataSnapshot snapshot = task.getResult();
+                    Log.d("task successful", ""+snapshot.child("overallRating").getValue() );
+                    float curRating = Float.parseFloat(String.valueOf(snapshot.child("overallRating").getValue()));
+                    DatabaseReference tempdb = database.getReference().child("professors").child(UID);
+                    tempdb.child("overallRating").setValue((rating + curRating)/2.0);
+                }
             }
         });
     }

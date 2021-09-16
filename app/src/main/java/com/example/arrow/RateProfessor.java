@@ -264,13 +264,13 @@ public class RateProfessor extends AppCompatActivity {
     }
 
     private int convertGradingToInt(String text){
-        if (text.equals("Half Output/Exams")){
+        if (text.equals("Pure Output-based")){
             return 1;
-        } else if (text.equals("Pure Output-based")){
-            return 2;
         } else if (text.equals("More Output-based")){
+            return 2;
+        } else if (text.equals("Half Output/Exams")){
             return 3;
-        } else if (text.equals("More Exam based")){
+        } else if (text.equals("More Exams based")){
             return 4;
         } else {
             return 5;

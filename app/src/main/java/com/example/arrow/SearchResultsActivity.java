@@ -159,7 +159,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                         //Log.d("BOOL",""+(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ));
 
                         // search for Last Name
-                        if(String.valueOf(snapshot.child("lName").getValue()).equals(searchItem) ) {
+                        if(String.valueOf(snapshot.child("lName").getValue()).equalsIgnoreCase(searchItem) ) {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
@@ -172,7 +172,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                         }
 
                         // search for First Name
-                        if(String.valueOf(snapshot.child("fName").getValue()).equals(searchItem) ) {
+                        if(String.valueOf(snapshot.child("fName").getValue()).equalsIgnoreCase(searchItem) ) {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
@@ -192,7 +192,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                         // search for College
 
-                        if(String.valueOf(snapshot.child("college").getValue()).equals(searchItem) ) {
+                        if(String.valueOf(snapshot.child("college").getValue()).equalsIgnoreCase(searchItem) ) {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
@@ -207,7 +207,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                         }
 
-                        if(profFullname.equals(searchItem) ) {
+                        if(profFullname.equalsIgnoreCase(searchItem) ) {
                             String pronoun = String.valueOf(snapshot.child("pronoun").getValue());
                             String lname = String.valueOf(snapshot.child("lName").getValue());
                             String college = String.valueOf(snapshot.child("college").getValue());
